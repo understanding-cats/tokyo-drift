@@ -22,6 +22,12 @@ For debugging, you can add the following statement to your electron window:
 win.webContents.openDevTools()
 ```
 
+## Verify linting
+
+```
+npm run lint
+```
+
 ## Run tests
 
 ```
