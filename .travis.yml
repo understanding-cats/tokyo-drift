@@ -5,9 +5,7 @@ node_js:
   - "node"
 
 addons:
-  apt:
-    packages:
-      - xvfb
+    chrome: stable
 
 services:
   - xvfb
