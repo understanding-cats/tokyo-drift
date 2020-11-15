@@ -16,6 +16,7 @@ install:
 
 script:
   - npm run lint
+  - npm ls got
   - npm run test
   - npm run package
   - npm run doc
