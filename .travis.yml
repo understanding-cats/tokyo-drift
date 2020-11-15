@@ -12,7 +12,7 @@ services:
   - xvfb
 
 install:
-  - npm install
+  - npm ci
 
 script:
   - npm run lint
