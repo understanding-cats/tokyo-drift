@@ -1,0 +1,25 @@
+os: linux
+language: node_js
+
+node_js:
+  - "node"
+
+addons:
+  apt:
+    packages:
+      - xvfb
+
+install:
+  - npm install
+  - export DISPLAY=':99.0'
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+
+script:
+  - npm run lint
+  - npm run test
+  - npm run package
+  - npm run doc
+
+cache:
+  directories:
+    - node_modules

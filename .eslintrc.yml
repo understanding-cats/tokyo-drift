@@ -1,0 +1,17 @@
+env:
+  browser: true
+  commonjs: true
+  es2021: true
+  node: true
+extends:
+  - airbnb-base
+settings:
+  import/core-modules: [ electron ]
+globals: {
+    'MAIN_WINDOW_WEBPACK_ENTRY': true
+}
+parserOptions:
+  ecmaVersion: 12
+rules: {
+  "global-require": "off"
+}
