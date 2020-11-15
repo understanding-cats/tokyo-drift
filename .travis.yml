@@ -9,6 +9,9 @@ addons:
     packages:
       - xvfb
 
+services:
+  - xvfb
+
 install:
   - npm install
 
