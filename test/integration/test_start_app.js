@@ -7,6 +7,8 @@ describe('Application launch', function () {
   this.timeout(10000)
 
   beforeEach(function () {
+    console.log(__dirname)
+    console.log(path.join(__dirname, '../..'))
     this.app = new Application({
       path: electronPath,
       args: [path.join(__dirname, '../..')]
