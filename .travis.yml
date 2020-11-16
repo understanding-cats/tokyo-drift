@@ -13,7 +13,7 @@ services:
 
 install:
   - npm set progress=false
-  - npm ci
+  - npm install
 
 script:
   - npm run lint
