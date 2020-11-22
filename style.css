@@ -1,0 +1,129 @@
+body {
+  background-color: #F1DCDC;
+  background-size: cover;
+}
+.set_session{
+    margin: auto;
+    margin-top: 10%;
+    width: 80%;
+    height: 10%;
+}
+
+.pomodoro {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 50%;
+  padding-top: 15px;
+  padding-bottom: 25px;
+  border: 3px solid #73AD21;
+  margin: auto;
+
+}
+#tomato{
+  margin: auto;
+  margin-top: 10%;
+  height: 90%;
+  width: 90%;
+  border-radius: 50%;
+  background-color: #DF7263;
+  border: 1px solid #FFFFFF;
+}
+p {
+  text-align: center;
+}
+
+
+.flip-clock-wrapper {
+  max-width: 460px;
+  margin: 3em auto 2em;
+  display: flex;
+  justify-content: center;
+}
+
+.col-md-4 {
+  display: flex;
+  justify-content: center;
+}
+
+.col-md-2 {
+  display: flex;
+  justify-content: center;
+  height: 34px;
+  align-items: center;
+}
+
+.counter {
+  display: flex;
+  justify-content: center;
+}
+
+#clock {
+  margin: auto;
+  margin-top: 15%;
+}
+
+.container {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  width: 90%;
+  height: 20%;
+  transform: translate(-50%, -50%);
+
+  padding-top: 15px;
+  padding-bottom: 25px;
+
+
+}
+
+.middle {
+  display: inline-block;
+}
+
+#btns {
+  display: flex;
+  justify-content: center;
+}
+
+
+.btn_customize{
+  margin:10px;
+   background-color: #D3EAEC;
+   border: none;
+   color: white;
+   padding: 40px 32px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;
+}
+
+
+.btn {
+  background-color: #D3EAEC;
+  color: #000000;
+  margin-left: 10px;
+}
+
+#sessInc, #sessDec, #breakInc, #breakDec {
+  font-weight: bold;
+}
+
+#stats {
+
+  width: 220px;
+  height: 70px;
+  border-radius: 10px;
+  color: #000000;
+  font-size: 45px;
+  text-align: center;
+}
+
+#statRow {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
