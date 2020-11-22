@@ -31,10 +31,16 @@ npm run lint
 ## Run tests
 
 ```
-npm run test
+npm run test:all
 ```
 
 All the test should be in the `/test` directory.
+
+If you want to run only the unit tests:
+
+```
+npm run test:unit
+```
 
 ## Generate the documentation
 
