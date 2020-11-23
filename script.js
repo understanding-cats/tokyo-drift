@@ -1,92 +1,96 @@
-$(document).ready(function(){
-  var countS = 25;
-  $("#session").html(countS);
-  var countB = 5;
-  $("#break").html(countB);
-  var pos = "pomodoro";
-  var countLama;
-  var posLama;
-  var count;
-  $("#stats").html(pos);
-  var clock = $(".timer").FlipClock(0, {
-    countdown: true,
-    clockFace: 'MinuteCounter',
-    autoStart: false,
-    callbacks: {
-      interval: function(){
-        if (clock.getTime() == 0){
-          if (pos == "session"){
-            clock.setTime(countB*60);
-            clock.start();
-            pos = "break";
-            $("#stats").html(pos);
-            document.getElementById("tomato").style.backgroundColor = "#63BADF";
-          } else if (pos == "break"){
-            clock.setTime(countS*60);
-            clock.start();
-            pos = "session";
-            $("#stats").html(pos);
-            document.getElementById("tomato").style.backgroundColor = "#DF7263";
+var total_work = 5;
+var total_break = 5;
+var total_secs = total_work;
+var intervalID;
+var curr_session = 0;
+// 0 - no session
+// 1 - working
+// 2 - break
 
-          }
-        }
-      }
-    }
-  })
-  //SESSION
-  $("#sessInc").on("click", function(){
-    if ($("#session").html() > 0){
-      countS = parseInt($("#session").html());
-      countS+=1;
-      $("#session").html(countS);
-      //clock.setTime(countS*60);
-    }
-  });
-  $("#sessDec").on("click", function(){
-    if ($("#session").html() > 1){
-      countS = parseInt($("#session").html());
-      countS-=1;
-      $("#session").html(countS);
-      //clock.setTime(countS*60);
-    }
-  });
-  //BREAK
-  $("#breakInc").on("click", function(){
-    if ($("#break").html() > 0){
-      countB = parseInt($("#break").html());
-      countB+=1;
-      $("#break").html(countB);
-    }
-  });
-  $("#breakDec").on("click", function(){
-    if ($("#break").html() > 1){
-      countB = parseInt($("#break").html());
-      countB-=1;
-      $("#break").html(countB);
-    }
-  });
-  $("#start").on("click", function(){
-    if (count != countS || clock.getTime()==0){
-      clock.setTime(countS*60);
-      pos="session";
-      $("#stats").html(pos);
-    } else {
-      pos = posLama;
-      $("#stats").html(pos);
-    }
-    count = countS;
-    clock.start();
-  });
-  $("#stop").on("click", function(){
-    clock.stop();
-    countLama = clock.getTime();
-    posLama = $("#stats").html();
-  });
-  $("#clear").on("click", function(){
-    clock.stop();
-    pos = "pomodoro";
-    $("#stats").html(pos);
-    document.getElementById("tomato").style.backgroundColor = "#DF7263";
-    clock.setTime(0);
-  });
-});
+
+//*** utility functions ***
+function padzero(num){
+  var s = "00"+num;
+  return s.substr(s.length - 2);
+};
+function showstatus(){
+  if (curr_session == 0){
+      document.getElementById("status").innerHTML= "Pomodoro";
+  };
+  if (curr_session == 1){
+    document.getElementById("status").innerHTML= "working...";
+  };
+  if(curr_session == 2){
+    document.getElementById("status").innerHTML= "break";
+  };
+};
+function miniclock(secs){
+  var min = Math.floor(secs/60);
+  var sec = Math.floor(secs%60);
+  document.getElementById("count_down").innerHTML= padzero(min)+":"+padzero(sec);
+};
+
+///***************************
+
+// set session intervals
+
+function getSession(){
+   var countW = document.getElementById("work_ses").value;
+   var countB = document.getElementById("break_ses").value;
+   total_work = countW*60;
+   total_break = countB*60;
+   total_secs = total_work;
+   miniclock(total_secs);
+};
+
+
+// clock
+function showtime(){
+  if (curr_session==1 && total_secs>=0){
+    total_secs = total_secs-1;
+    miniclock(total_secs);
+    showstatus();
+  };
+  if(curr_session == 1 && total_secs<0){
+    total_secs = total_break;
+    curr_session = 2;
+    document.body.style.backgroundColor = "#D0E9F3";
+    document.getElementById("tomato_img").src = "tomatoblue_tran.png";
+    miniclock(total_secs);
+    showstatus();
+  };
+  if (curr_session == 2 && total_secs>=0){
+    total_secs = total_secs-1;
+    miniclock(total_secs);
+    showstatus();
+  };
+  if (curr_session==2 && total_secs<0){
+    clear_all();
+  };
+
+};
+function start(){
+
+   if (curr_session == 0 && total_secs>0){
+     curr_session = 1;
+    document.body.style.backgroundColor = "#F1DCDC";
+    document.getElementById("tomato_img").src = "tomato_tran.png";
+   };
+    intervalID = setInterval(showtime,1000);
+};
+function stop(){
+   clearInterval(intervalID);
+   document.getElementById("status").innerHTML = "Pause";
+};
+
+function clear_all(){
+    curr_session = 0;
+    document.body.style.backgroundColor = "#F1DCDC";
+    document.getElementById("tomato_img").src = "tomato_tran.png";
+    clearInterval(intervalID);
+    document.getElementById("status").innerHTML = "pomodoro";
+    total_secs = total_work;
+    var min = Math.floor(total_secs/60);
+    var sec = Math.floor(total_secs%60);
+    document.getElementById("count_down").innerHTML= padzero(min)+":"+padzero(sec);
+};

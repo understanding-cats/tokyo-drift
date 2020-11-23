@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="mystyle.css">
+</head>
+<body>
+
+<div class = "secs" id = "stat">
+  <h1 id = "status">pomodoro</h1>
+</div>
+
+<div class = "secs" id = "mainsec">
+
+  <div id = "container">
+    <img id = "tomato_img" src = "tomato_tran.png"/>
+    <div id = "clock">
+      <p id = "count_down">00:00</p>
+    </div>
+
+  </div>
+  <div id = "control">
+    <button class="controls" id="start" onclick="start();">start</button>
+    <button class="controls" id="stop" onclick="stop();">stop</button>
+    <button class="controls" id="clear" onclick="clear_all();">clear</button>
+  </div>
+
+</div>
+
+<div class = "secs" id = "setsession">
+  <label for="work_ses">work</label><input id="work_ses" type="number" min="1" max = "60" value = "25"/>
+
+  <label for="break_ses">break</label><input id="break_ses" type="number" min="1" max="60" value = "5"/>
+
+  <button onclick="getSession();">set time</button>
+
+  <p>maximum 60min sessions</p>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
