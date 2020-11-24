@@ -19,22 +19,31 @@
 
   </div>
   <div id = "control">
-    <button class="controls" id="start" onclick="start();">start</button>
-    <button class="controls" id="stop" onclick="stop();">stop</button>
-    <button class="controls" id="clear" onclick="clear_all();">clear</button>
+    <button class="controls" id="start" onclick="start();"><img id = "start_img" src = "start_button.png"/></button>
+    <button class="controls" id="stop" onclick="stop();"><img id = "pause_img" src = "pause_button.png"/></button>
+    <button class="controls" id="clear" onclick="clear_all();"><img id = "clear_img" src = "clear_button.png"/></button>
   </div>
 
 </div>
 
-<div class = "secs" id = "setsession">
-  <label for="work_ses">work</label><input id="work_ses" type="number" min="1" max = "60" value = "25"/>
+<div class = "secs" id = "setsessec">
+  <div id="worklabel">
+    <img id = "worklabelimg" src = "setwork.png"/>
+    <label for="work_ses"></label><input id="work_ses" type="number" min="1" max = "60" value = "25"/>
+  </div>
 
-  <label for="break_ses">break</label><input id="break_ses" type="number" min="1" max="60" value = "5"/>
+  <div id = "breaklabel">
+    <img id = "breaklabelimg" src = "setbreak.png"/>
+    <label for="break_ses"></label><input id="break_ses" type="number" min="1" max="60" value = "5"/>
+  </div>
 
-  <button onclick="getSession();">set time</button>
-
-  <p>maximum 60min sessions</p>
 </div>
+
+<div class = "secs" id = "getbuttonsec">
+  <button id = "getsecbut" onclick="getSession();"><img id = "set_img" src = "set_button.png"/></button>
+
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>

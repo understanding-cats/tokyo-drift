@@ -6,7 +6,8 @@ var curr_session = 0;
 // 0 - no session
 // 1 - working
 // 2 - break
-
+// 4 - pause from work
+// 5 - pause from chill
 
 //*** utility functions ***
 function padzero(num){
@@ -17,11 +18,11 @@ function showstatus(){
   if (curr_session == 0){
       document.getElementById("status").innerHTML= "Pomodoro";
   };
-  if (curr_session == 1){
+  if (curr_session == 1 || curr_session == 4){
     document.getElementById("status").innerHTML= "working...";
   };
-  if(curr_session == 2){
-    document.getElementById("status").innerHTML= "break";
+  if(curr_session == 2 || curr_session == 5){
+    document.getElementById("status").innerHTML= "chilling...";
   };
 };
 function miniclock(secs){
@@ -41,6 +42,7 @@ function getSession(){
    total_break = countB*60;
    total_secs = total_work;
    miniclock(total_secs);
+   clear_all();
 };
 
 
@@ -71,14 +73,30 @@ function showtime(){
 };
 function start(){
 
-   if (curr_session == 0 && total_secs>0){
+   if ((curr_session == 0 || curr_session == 4) && total_secs>0){
      curr_session = 1;
-    document.body.style.backgroundColor = "#F1DCDC";
-    document.getElementById("tomato_img").src = "tomato_tran.png";
+     //document.body.style.backgroundColor = "#F1DCDC";
+     //document.getElementById("tomato_img").src = "tomato_tran.png";
+     intervalID = setInterval(showtime,1000);
    };
-    intervalID = setInterval(showtime,1000);
+   if (curr_session==5 && total_secs>0){
+     curr_session = 2;
+     intervalID = setInterval(showtime,1000);
+   };
+
+
 };
 function stop(){
+  if(curr_session == 0){
+    return;
+  };
+  if (curr_session == 1){
+    curr_session = 4;
+  };
+  if(curr_session == 2){
+    curr_session = 5;
+  };
+
    clearInterval(intervalID);
    document.getElementById("status").innerHTML = "Pause";
 };
