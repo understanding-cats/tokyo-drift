@@ -20,7 +20,7 @@ class Settings {
 
   /**
    * Get the settings in persistent data.
-   * @return {boolean} True if success else False
+   * @return {Setting} Setting object
    */
   get() {
     // ..

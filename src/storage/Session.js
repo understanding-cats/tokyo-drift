@@ -27,12 +27,4 @@ class Session {
   store() {
   // ...
   }
-
-  /**
-   * Get the session in persistent data.
-   * @return {number} id of the session if success.
-   */
-  getFromLocalStorage() {
-    // ..
-  }
 }
