@@ -1,6 +1,6 @@
 /**
- * Starts the timer and create the session accordingly
- * (UI changes are also handle there)
+ * Starts the timer and creates the session accordingly
+ * (UI changes are also handled there)
  * @param {string} name - Name of the session
  * @returns {boolean} - True if success else False
  */
