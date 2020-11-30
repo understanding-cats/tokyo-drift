@@ -102,7 +102,8 @@ function clear_all() {
   document.body.style.backgroundColor = "#F1DCDC";
   document.getElementById("tomato_img").src = "images/tomato_tran.png";
   clearInterval(intervalID);
-  document.getElementById("status").innerHTML = "pomodoro";
+  // TODO don't duplicate this text between the HTML and here
+  document.getElementById("status").innerHTML = "Press the start button to begin working.";
   total_secs = total_work;
   var min = Math.floor(total_secs / 60);
   var sec = Math.floor(total_secs % 60);
