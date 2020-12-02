@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <link rel="stylesheet" href="../css/mystyle.css" />
+    <title>Pomodoro 2: Tokyo Drift</title>
+  </head>
+  <body onload ="getsessioninfo()">
+    <div class="secs" id="stat">
+      <h1 id="status">Press the start button to begin working.</h1>
+    </div>
+    <div class="container">
+
+      <button type="button" class="collapsible">Set Session</button>
+      
+      <button type="button" class="collapsible">Session History</button>
+
+      <button type="button" class="collapsible" onclick = "back2manu();">Main Manu</button>
+
+    </div>
+    <div class="secs" id="mainsec">
+      <div id="container">
+        <img id="tomato_img" src="../images/tomato_tran.png" />
+        <div id="clock">
+          <p id="count_down">00:00</p>
+        </div>
+      </div>
+      <div id="control">
+        <button class="controls" id="start" onclick="start();">
+          <img id="start_img" src="../images/start_button.png" />
+        </button>
+        <button class="controls" id="stop" onclick="stop();">
+          <img id="pause_img" src="../images/pause_button.png" />
+        </button>
+        <button class="controls" id="clear" onclick="clear_all();">
+          <img id="clear_img" src="../images/clear_button.png" />
+        </button>
+      </div>
+    </div>
+
+    <div class="secs" id="setsessec">
+      <div class= "sessioninfo">
+        <p id = "work_time"></p>
+      </div>
+
+      <div class = "sessioninfo">
+        <p id = "short_breaktime"></p>
+      </div>
+      <div class = "sessioninfo">
+        <p id = "long_breaktime"></p>
+      </div>
+      <div class = "sessioninfo">
+        <p id = "total_periods"></p>
+      </div>
+    </div>
+    
+
+    <!--
+    <div id="confirmBox">
+      <div class="message"></div>
+      <span class="button yes">Yes</span>
+      <span class="button no">No</span>
+    </div>
+    <div class="secs" id="getbuttonsec">
+      <button id="getsecbut" onclick="getSession();">
+        <img id="set_img" src="images/set_button.png" />
+      </button>
+    </div>
+    -->
+
+    <script src="../js/script.js"></script>
+  </body>
+</html>

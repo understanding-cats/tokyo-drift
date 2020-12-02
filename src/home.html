@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/home.css" />
+    <title>Pomodoro 2: Tokyo Drift</title>
+  </head>
+  <body>
+    <div class = "banner"><h1 id="status">Welcome to Pomodoro2 Tokyo Drift</h1></div>
+
+
+    <div class = "container">
+        <div class = "secs" id = "session">
+            <button class="mode_select" id="setSession">
+                Set Sessions
+            </button>
+        </div>
+    
+        <div class = "secs" id = "sessionHistory">
+            <button class="mode_select" id="getHistory">
+                Session History
+            </button>
+        </div>
+
+    </div>
+
+
+
+    <!--
+    <div class="secs" id="getbuttonsec">
+      <button id="getsecbut" onclick="getSession();">
+        <img id="set_img" src="images/set_button.png" />
+      </button>
+    </div>
+    -->
+
+    <script type="text/javascript">
+        document.getElementById("setSession").onclick = function () {
+            location.href = "html/setsessionpage.html";
+        };
+    </script>
+  </body>
+</html>

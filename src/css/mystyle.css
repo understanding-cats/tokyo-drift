@@ -12,6 +12,16 @@ h1{
   justify-content: center;
   text-align: center;
 }
+
+label{
+  display:block;
+  margin:auto;
+}
+
+.popupinput{
+  display:block;
+  margin:auto;
+}
 #status{
   font-family: 'Courier New', Courier, monospace;
   font-size: xx-large;
@@ -179,6 +189,14 @@ h1{
   /*border: 1px solid #000000;*/
 }
 
+.sessioninfo{
+  position: relative;
+  top: 20%;
+  width : 200px;
+  height : 50px;
+  display: block;
+  border: 1px solid #000000;
+}
 #worklabel{
   position: absolute;
   width : 100%;
@@ -214,3 +232,29 @@ input{
   transform: translate(-50%, -50%);
 }
 
+.container{
+  position: absolute;
+  margin: auto;
+  left: 0%;
+  top: 20%;
+  width: 15%;
+  /*border: 3px solid #73AD21;*/
+}
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+
+/* modal */

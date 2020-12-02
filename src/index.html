@@ -1,12 +1,56 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-
+    <link rel="stylesheet" href="css/mystyle.css" />
+    <title>Pomodoro 2: Tokyo Drift</title>
   </head>
   <body>
-    <h1>💖 Hello World Understanding cats!</h1>
-    <p>Welcome to your Electron application.</p>
+    <div class="secs" id="stat">
+      <h1 id="status">Press the start button to begin working.</h1>
+    </div>
+
+    <div class="secs" id="mainsec">
+      <div id="container">
+        <img id="tomato_img" src="images/tomato_tran.png" />
+        <div id="clock">
+          <p id="count_down">00:00</p>
+        </div>
+      </div>
+      <div id="control">
+        <button class="controls" id="start" onclick="start();">
+          <img id="start_img" src="images/start_button.png" />
+        </button>
+        <button class="controls" id="stop" onclick="stop();">
+          <img id="pause_img" src="images/pause_button.png" />
+        </button>
+        <button class="controls" id="clear" onclick="clear_all();">
+          <img id="clear_img" src="images/clear_button.png" />
+        </button>
+      </div>
+    </div>
+
+    <div class="secs" id="setsessec">
+      <div id="worklabel">
+        <img id="worklabelimg" src="images/setwork.png" />
+        <label for="work_ses"></label
+        ><input id="work_ses" type="number" min="1" max="60" value="25" />
+      </div>
+
+      <div id="breaklabel">
+        <img id="breaklabelimg" src="images/setbreak.png" />
+        <label for="break_ses"></label
+        ><input id="break_ses" type="number" min="1" max="60" value="5" />
+      </div>
+    </div>
+
+    <!--
+    <div class="secs" id="getbuttonsec">
+      <button id="getsecbut" onclick="getSession();">
+        <img id="set_img" src="images/set_button.png" />
+      </button>
+    </div>
+    -->
+
+    <script src="js/script.js"></script>
   </body>
 </html>
