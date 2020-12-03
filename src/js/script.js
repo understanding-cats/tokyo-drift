@@ -1,4 +1,5 @@
-
+const { remote } = require("electron");
+const { Notification }=remote;
 //*** utility functions ***
 function back2manu(){
   location.href = "../home.html";
@@ -63,6 +64,11 @@ var curr_workperiod = 0;
 var total_secs = total_work;
 //total_secs is whatever displays on the clock
 
+// notification
+function showNotification () {
+  new Notification({title: 'Pomodoro Session',
+    body: 'Congratulations! One session completes.'}).show();
+}
 
 // clock
 function showtime() {
@@ -95,6 +101,7 @@ function showtime() {
   if (curr_session == 2 && total_secs < 0) {
     // if breaking and no remaining secs
     if (curr_workperiod == total_periods){
+      showNotification(); // show desktop notification
       var r = confirm("Session complete! Go back to manu? ");
       if (r == true){
         location.href = "../home.html";
