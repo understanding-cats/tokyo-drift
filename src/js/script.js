@@ -1,3 +1,5 @@
+const { remote } = require("electron");
+const { Notification }=remote;
 
 //*** utility functions ***
 function back2manu(){
@@ -63,6 +65,22 @@ var curr_workperiod = 0;
 var total_secs = total_work;
 //total_secs is whatever displays on the clock
 
+// desktop notification
+function showNotification (notif_kind) {
+  if(notif_kind==0){
+    new Notification({title: 'Pomodoro Sessions',
+      body: 'Congratulations! All sessions complete.'}).show();
+  }
+  else if(notif_kind==1){
+    new Notification({title: 'Pomodoro Session',
+      body: 'One working session completes.'}).show();
+  }
+  else if(notif_kind==2){
+    new Notification({title: 'Pomodoro Session',
+      body: 'One working session starts.'}).show();
+  }
+  // more notification kinds could be added here
+}
 
 // clock
 function showtime() {
@@ -80,6 +98,7 @@ function showtime() {
       total_secs = total_long_break;
     }
     //switch to break mode
+    showNotification(1); // show desktop notification for one session ends
     curr_session = 2;
     document.body.style.backgroundColor = "#D0E9F3";
     document.getElementById("tomato_img").src = "../images/tomatoblue_tran.png";
@@ -95,6 +114,7 @@ function showtime() {
   if (curr_session == 2 && total_secs < 0) {
     // if breaking and no remaining secs
     if (curr_workperiod == total_periods){
+      showNotification(0); // show desktop notification for all sessions end
       var r = confirm("Session complete! Go back to manu? ");
       if (r == true){
         location.href = "../home.html";
@@ -104,6 +124,7 @@ function showtime() {
     }else{
       curr_workperiod = curr_workperiod+1;
       //switch to work 
+      showNotification(2); // show desktop notification for one session starts
       curr_session = 1;
       total_secs = total_work;
       document.body.style.backgroundColor = "#F1DCDC";
