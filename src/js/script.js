@@ -98,14 +98,15 @@ function showNotification (notif_kind) {
 
 // clock
 function showtime() {
-  if (curr_session == 1 && total_secs > 0) {
+  if (curr_session == 1 && total_secs >= 0) {
     //working adn remaining secs >0
     total_secs = total_secs - 1;
-    miniclock(total_secs);
-
+    if(total_secs>=0){
+      miniclock(total_secs);
+    }
     showstatus(curr_session,curr_workperiod);
   }
-  if (curr_session == 1 && total_secs == 0) {
+  if (curr_session == 1 && total_secs < 0) {
     //working and remaining secs <= 0
     if(curr_workperiod%4!=0){
       total_secs = total_break;
@@ -117,31 +118,36 @@ function showtime() {
     curr_session = 2;
     document.body.style.backgroundColor = "#D0E9F3";
     document.getElementById("tomato_img").src = "../images/tomatoblue_tran.png";
-    miniclock(total_secs);
+    //miniclock(total_secs);
     showstatus(curr_session,curr_workperiod);
   }
-  if (curr_session == 2 && total_secs >0) {
+  if (curr_session == 2 && total_secs >=0) {
     // if breaking and have remaining secs
     total_secs = total_secs - 1;
-    miniclock(total_secs);
+    if(total_secs>=0){
+      miniclock(total_secs);
+    }
     showstatus(curr_session,curr_workperiod);
   }
-  if (curr_session == 2 && total_secs == 0) {
+  if (curr_session == 2 && total_secs < 0) {
     // if breaking and no remaining secs
+    //miniclock(total_secs);
     if (curr_workperiod == total_periods){
+      clearInterval(intervalID);
       showNotification(0); // show desktop notification for all sessions end
       var r = confirm("Session complete! Go back to manu? ");
       if (r == true){
         location.href = "../home.html";
+      }else{
+        clear_all();
       }
-      clear_all();
 
     }else{
       curr_workperiod = curr_workperiod+1;
       //switch to work 
       showNotification(2); // show desktop notification for one session starts
       curr_session = 1;
-      total_secs = total_work;
+      total_secs = total_work-1;
       document.body.style.backgroundColor = "#F1DCDC";
       document.getElementById("tomato_img").src = "../images/tomato_tran.png";
       miniclock(total_secs);
