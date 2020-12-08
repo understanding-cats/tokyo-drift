@@ -9,15 +9,29 @@
     <div class="secs" id="stat">
       <h1 id="status">Press the start button to begin working.</h1>
     </div>
-    <div class="container">
 
-      <button type="button" class="collapsible">Set Session</button>
-      
-      <button type="button" class="collapsible">Session History</button>
+    <div id="SideMenu" class="sidebar">
+      <button onclick="openModal()">Set Session</button>
+      <button>Session History</button>
+      <button onclick="back2manu()">Back To Home</button>
+      <p>Current Session Info </p>
+      <p id = "currworktime"></p>
+      <p id = "currshortbreak"></p>
+      <p id = "currlongbreak"></p>
+      <p id = "currworkp"></p>
 
-      <button type="button" class="collapsible" onclick = "back2manu();">Main Manu</button>
+      <p>Next Session Info </p>
+      <p id = "worktime"></p>
+      <p id = "shortbreak"></p>
+      <p id = "longbreak"></p>
+      <p id = "workp"></p>
 
     </div>
+
+    <div id="hamburger">
+      <button class="toggleMenuBtn" onclick="toggleMenu()">☰ </button>  
+    </div>
+
     <div class="secs" id="mainsec">
       <div id="container">
         <img id="tomato_img" src="../images/tomato_tran.png" />
@@ -32,26 +46,29 @@
         <button class="controls" id="stop" onclick="stop();">
           <img id="pause_img" src="../images/pause_button.png" />
         </button>
-        <button class="controls" id="clear" onclick="clear_all();">
+        <button class="controls" id="clear" onclick="cancel_all();">
           <img id="clear_img" src="../images/clear_button.png" />
         </button>
       </div>
     </div>
 
-    <div class="secs" id="setsessec">
-      <div class= "sessioninfo">
-        <p id = "work_time"></p>
-      </div>
 
-      <div class = "sessioninfo">
-        <p id = "short_breaktime"></p>
+    <div id="SetSessionModal" class="modal">
+
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">x</span>
+         
+          <b>I want to work for <input id="pomo_length" type="number" min="1" max="60" value="25" /> minutes. </b><br>
+          
+          <b> Have a short break for <input id="sbreak_length" type="number" min="1" max="60" value="5" /> minutes.</b> <br>
+  
+          <b>And have a long break for <input id="lbreak_length" type="number" min="1" max="60" value="15" /> minutes if I finished 4 break sessions. </b><br>
+  
+          <b>I want to have <input id="work_periods" type="number" min="1" max="60" value="4" /> work periods in total. </b><br>
+  
+          <button onclick="startsess()">GO!</button>
       </div>
-      <div class = "sessioninfo">
-        <p id = "long_breaktime"></p>
-      </div>
-      <div class = "sessioninfo">
-        <p id = "total_periods"></p>
-      </div>
+    
     </div>
     
 
@@ -67,7 +84,38 @@
       </button>
     </div>
     -->
-
+    <script src = "../js/setsession.js"></script>
     <script src="../js/script.js"></script>
+    <script type="text/javascript">
+
+      var menu_open = 0;
+
+      function toggleMenu(){
+          if (menu_open == 0){
+              openNav();
+              menu_open = 1;
+          }else{
+              closeNav();
+              menu_open = 0; 
+          }
+      }
+      function openNav() {
+        
+        document.getElementById("SideMenu").style.width = "250px";
+        document.getElementById("hamburger").style.marginLeft = "250px";
+      }
+      
+      function closeNav() {
+        document.getElementById("SideMenu").style.width = "0";
+        document.getElementById("hamburger").style.marginLeft= "0";
+      }
+      function closeModal(){
+         document.getElementById("SetSessionModal").style.display = "none";
+      }
+      function openModal(){
+          document.getElementById("SetSessionModal").style.display = "block";
+      }
+
+    </script>
   </body>
 </html>

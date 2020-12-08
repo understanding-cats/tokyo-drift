@@ -4,25 +4,56 @@
     <link rel="stylesheet" href="css/home.css" />
     <title>Pomodoro 2: Tokyo Drift</title>
   </head>
-  <body>
+  <body onload="getsettings();">
     <div class = "banner"><h1 id="status">Welcome to Pomodoro2 Tokyo Drift</h1></div>
 
 
-    <div class = "container">
-        <div class = "secs" id = "session">
-            <button class="mode_select" id="setSession">
-                Set Sessions
-            </button>
-        </div>
-    
-        <div class = "secs" id = "sessionHistory">
-            <button class="mode_select" id="getHistory">
-                Session History
-            </button>
-        </div>
+    <div id="SideMenu" class="sidebar">
+      <button onclick="openModal()">Set Session</button>
+      <button>Session History</button>
+      <p>Current Session Info </p>
+      <p id = "worktime"></p>
+      <p id = "shortbreak"></p>
+      <p id = "longbreak"></p>
+      <p id = "workp"></p>
 
     </div>
 
+    <div id="hamburger">
+      <button class="toggleMenuBtn" onclick="toggleMenu()">☰ </button>  
+    </div>
+
+    <div class="secs" id="mainsec">
+      <div id="container">
+        <img id="tomato_img" src="images/tomato_tran.png" />
+        
+         <button id = "startSessionBtn" onclick = "goToPomo();">Start Session</button>
+        
+      </div>
+
+    </div>
+    <div class = "secs" id = "nameSec">
+      <input id="sessionName" type="text" value="Default Pomodoro Session" /> 
+    </div>
+
+    <div id="SetSessionModal" class="modal">
+
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">x</span>
+         
+          <b>I want to work for <input id="pomo_length" type="number" min="1" max="60" value="25" /> minutes. </b><br>
+          
+          <b> Have a short break for <input id="sbreak_length" type="number" min="1" max="60" value="5" /> minutes.</b> <br>
+  
+          <b>And have a long break for <input id="lbreak_length" type="number" min="1" max="60" value="15" /> minutes if I finished 4 break sessions. </b><br>
+  
+          <b>I want to have <input id="work_periods" type="number" min="1" max="60" value="4" /> work periods in total. </b><br>
+  
+          <button onclick="startsess()">GO!</button>
+      </div>
+    
+    </div>
+    
 
 
     <!--
@@ -32,11 +63,37 @@
       </button>
     </div>
     -->
-
+    <script src = "js/setsession.js"></script>
     <script type="text/javascript">
-        document.getElementById("setSession").onclick = function () {
-            location.href = "html/setsessionpage.html";
-        };
+
+        var menu_open = 0;
+
+        function toggleMenu(){
+            if (menu_open == 0){
+                openNav();
+                menu_open = 1;
+            }else{
+                closeNav();
+                menu_open = 0; 
+            }
+        }
+        function openNav() {
+          
+          document.getElementById("SideMenu").style.width = "250px";
+          document.getElementById("hamburger").style.marginLeft = "250px";
+        }
+        
+        function closeNav() {
+          document.getElementById("SideMenu").style.width = "0";
+          document.getElementById("hamburger").style.marginLeft= "0";
+        }
+        function closeModal(){
+           document.getElementById("SetSessionModal").style.display = "none";
+        }
+        function openModal(){
+            document.getElementById("SetSessionModal").style.display = "block";
+        }
+
     </script>
   </body>
 </html>

@@ -3,6 +3,10 @@ function back2manu(){
     location.href = "../home.html";
 
 };
+function goToPomo(){
+    location.href = "html/pomodoro.html";
+
+}
 function getsettings(){
     var work_insec = localStorage.getItem('work_ls') || 25*60;
     var sbreak_insec = localStorage.getItem('sbreak_ls') || 5*60;
@@ -12,12 +16,24 @@ function getsettings(){
     document.getElementById("sbreak_length").value = sbreak_insec/60;
     document.getElementById("lbreak_length").value = lbreak_insec/60;
     document.getElementById("work_periods").value = work_periods;
+    displaySessionInfo();
+
+};
+
+function displaySessionInfo(){
+    var work_insec = localStorage.getItem('work_ls') || 25*60;
+    var sbreak_insec = localStorage.getItem('sbreak_ls') || 5*60;
+    var lbreak_insec = localStorage.getItem('lbreak_ls') || 15*60;
+    var work_periods = localStorage.getItem('periods_ls') || 4;
+    document.getElementById("worktime").innerText = "Work Session: "+ work_insec/60 + "mins";
+    document.getElementById("shortbreak").innerText = "Short Break: "+ sbreak_insec/60 + "mins";
+    document.getElementById("longbreak").innerText = "Long Break: "+ lbreak_insec/60 + "mins";
+    document.getElementById("workp").innerText = "Work Periods: "+ work_periods;
 
 };
 
 function startsess(){
     if (typeof(Storage) !== "undefined") {
-        // Store
         var work_insec =   60*document.getElementById("pomo_length").value
         var sbreak_insec = 60*document.getElementById("sbreak_length").value
         var lbreak_insec = 60*document.getElementById("lbreak_length").value
@@ -26,10 +42,9 @@ function startsess(){
         localStorage.setItem('sbreak_ls', sbreak_insec);
         localStorage.setItem('lbreak_ls', lbreak_insec);
         localStorage.setItem('periods_ls', work_periods);
-        // Retrieve
-        //document.getElementById("result").innerHTML = localStorage.getItem("work_ls");
-        location.href = "pomodoro.html";
+        document.getElementById("SetSessionModal").style.display = "none";
+        displaySessionInfo();
     } else {
-        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage";
       }
 };
