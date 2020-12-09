@@ -261,8 +261,14 @@ label{
   width: 80%;
 }
 
+
+#HistoryModalContent{
+  height: 70%;
+  overflow: scroll;
+}
+
 .close {
-  color: #aaaaaa;
+  color: #a5a5a5;
   float: right;
   font-size: 28px;
   font-weight: bold;
@@ -270,7 +276,35 @@ label{
 
 .close:hover,
 .close:focus {
-  color: #000;
+  color: rgb(0, 0, 0);
   text-decoration: none;
   cursor: pointer;
+}
+
+
+.collapsibleBtn{
+  background-color: #777777;
+  color:white;
+  padding: 18px;
+  width:100%;
+  border:none;
+  text-align: left;
+  outline:none;
+  font-size: 15px;
+}
+
+#dummyBtn , #dummyContent{
+  display: none;
+}
+
+
+.collapsibleBtn:hover{
+  background-color: #555555;
+}
+
+.coll-content{
+  padding: 0 18px;
+  display :none;
+  overflow: hidden;
+  background-color: #f1f1f1;
 }
