@@ -49,9 +49,9 @@ var sbreak_insec = localStorage.getItem('sbreak_ls') || 5*60;
 var lbreak_insec = localStorage.getItem('lbreak_ls') || 15*60;
 var work_periods = localStorage.getItem('periods_ls') || 4;
 
-document.getElementById("currworktime").innerText = "Work Session: "+ work_insec/60 + "mins";
-document.getElementById("currshortbreak").innerText = "Short Break: "+ sbreak_insec/60 + "mins";
-document.getElementById("currlongbreak").innerText = "Long Break: "+ lbreak_insec/60 + "mins";
+document.getElementById("currworktime").innerText = "Work Session: "+ work_insec/60 + " mins";
+document.getElementById("currshortbreak").innerText = "Short Break: "+ sbreak_insec/60 + " mins";
+document.getElementById("currlongbreak").innerText = "Long Break: "+ lbreak_insec/60 + " mins";
 document.getElementById("currworkp").innerText = "Work Periods: "+ work_periods;
 
 miniclock(work_insec);
