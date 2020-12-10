@@ -1,7 +1,7 @@
 // Require ipcRender
-const { ipcRenderer } = require('electron');
+const { ipcRenderer } = require("electron");
 
-const timerBox = document.getElementById('timerBox');
+const timerBox = document.getElementById("timerBox");
 
 // This object is repeatedly updated by the code in this module. I know it
 // looks weird, then, that this is declared using const (and not var or let),
@@ -18,9 +18,10 @@ const setTimer = () => {
   timerBox.innerHTML = `${timeObject.hours}:${timeObject.minutes}:${timeObject.seconds}`;
 };
 
-const emptyTimer = () => (
-  timeObject.hours === 0 && timeObject.minutes === 0 && timeObject.seconds === 0
-);
+const emptyTimer = () =>
+  timeObject.hours === 0 &&
+  timeObject.minutes === 0 &&
+  timeObject.seconds === 0;
 
 const initTime = () => {
   timeObject.hours = 0;
@@ -43,7 +44,7 @@ const passOneSecond = () => {
 };
 
 // Listen to the 'timer-change' event
-ipcRenderer.on('timer-change', (event, t) => {
+ipcRenderer.on("timer-change", (event, t) => {
   initTime();
   setTimer();
 

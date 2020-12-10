@@ -10,8 +10,7 @@ settings:
 globals: { "MAIN_WINDOW_WEBPACK_ENTRY": true }
 parserOptions:
   ecmaVersion: 12
-rules:
-  {
+rules: {
     "global-require": "off",
     "no-unused-vars": "off",
     "no-useless-constructor": "off",
@@ -24,4 +23,12 @@ rules:
     # dynamically load a file in savesession.js, and in the future we should
     # do this using Electron's file APIs
     "import/no-dynamic-require": "off",
+    # The following are some rules where prettier and eslint (or at least the
+    # Airbnb settings for eslint) disagree, as of writing. To make life easier,
+    # we just delegate to prettier for most of these (so even though the Airbnb
+    # rules say to use single quotes, we override that here).
+    "quotes": ["error", "double"],
+    "comma-dangle": "off",
+    "operator-linebreak": "off",
+    "implicit-arrow-linebreak": "off",
   }
