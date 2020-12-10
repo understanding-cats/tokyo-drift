@@ -1,19 +1,9 @@
 function back2menu() {
   location.href = '../home.html';
 }
+
 function goToPomo() {
   location.href = 'html/pomodoro.html';
-}
-function getsettings() {
-  const workInSec = localStorage.getItem('work_ls') || 25 * 60;
-  const sbreakInSec = localStorage.getItem('sbreak_ls') || 5 * 60;
-  const lbreakInSec = localStorage.getItem('lbreak_ls') || 15 * 60;
-  const workPeriods = localStorage.getItem('periods_ls') || 4;
-  document.getElementById('pomo_length').value = workInSec / 60;
-  document.getElementById('sbreak_length').value = sbreakInSec / 60;
-  document.getElementById('lbreak_length').value = lbreakInSec / 60;
-  document.getElementById('work_periods').value = workPeriods;
-  displaySessionInfo();
 }
 
 function displaySessionInfo() {
@@ -25,6 +15,18 @@ function displaySessionInfo() {
   document.getElementById('shortbreak').innerText = `Short Break: ${sbreakInSec / 60}mins`;
   document.getElementById('longbreak').innerText = `Long Break: ${lbreakInSec / 60}mins`;
   document.getElementById('workp').innerText = `Work Periods: ${workPeriods}`;
+}
+
+function getsettings() {
+  const workInSec = localStorage.getItem('work_ls') || 25 * 60;
+  const sbreakInSec = localStorage.getItem('sbreak_ls') || 5 * 60;
+  const lbreakInSec = localStorage.getItem('lbreak_ls') || 15 * 60;
+  const workPeriods = localStorage.getItem('periods_ls') || 4;
+  document.getElementById('pomo_length').value = workInSec / 60;
+  document.getElementById('sbreak_length').value = sbreakInSec / 60;
+  document.getElementById('lbreak_length').value = lbreakInSec / 60;
+  document.getElementById('work_periods').value = workPeriods;
+  displaySessionInfo();
 }
 
 /**
