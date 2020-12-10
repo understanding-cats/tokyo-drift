@@ -1,18 +1,15 @@
 // Require ipcRender
-const { ipcRenderer } = require("electron");
+const { ipcRenderer } = require('electron');
 
-let timerBox = document.getElementById("timerBox");
+const timerBox = document.getElementById('timerBox');
 
 const setTimer = () => {
-  timerBox.innerHTML =
-    timeObject.hours + ":" + timeObject.minutes + ":" + timeObject.seconds;
+  timerBox.innerHTML = `${timeObject.hours}:${timeObject.minutes}:${timeObject.seconds}`;
 };
 
-const emptyTimer = () => {
-  return (
-    timeObject.hours == 0 && timeObject.minutes == 0 && timeObject.seconds == 0
-  );
-};
+const emptyTimer = () => (
+  timeObject.hours == 0 && timeObject.minutes == 0 && timeObject.seconds == 0
+);
 
 const initTime = () => {
   timeObject.hours = 0;
@@ -41,12 +38,12 @@ const passOneSecond = () => {
 };
 
 // Listen to the 'timer-change' event
-ipcRenderer.on("timer-change", (event, t) => {
+ipcRenderer.on('timer-change', (event, t) => {
   initTime();
   setTimer();
 
   // Execute every second
-  let timerIntervalId = setInterval(() => {
+  const timerIntervalId = setInterval(() => {
     passOneSecond();
     setTimer();
     if (emptyTimer()) {
