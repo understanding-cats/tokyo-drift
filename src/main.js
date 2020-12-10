@@ -29,7 +29,6 @@ const createWindow = () => {
     })
   );
   // mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
-  console.log("here");
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
   mainWindow.webContents.on("did-finish-load", () => {
