@@ -1,6 +1,9 @@
 # Pomodoro 2: Tokyo Drift
 
-<div align="center">
+<!-- Scale down image using a containing div, which also centers it.
+     https://stackoverflow.com/a/1733018
+-->
+<div align="center" style="width: 200px;">
 <img src="https://raw.githubusercontent.com/understanding-cats/tokyo-drift/main/src/images/tomato_tran.png" />
 </div>
 
@@ -64,7 +67,7 @@ npm run test:all
 npm run test:unit
 ```
 
-## Generate the documentation
+### Generate the documentation
 
 ```
 npm run doc
@@ -72,7 +75,7 @@ npm run doc
 
 All the documentation should be available after that in the `docs/` directory in the HTML file format.
 
-## Build the application
+### Build the application
 
 **NOTE: This is currently not working. We're hoping to fix this soon.**
 
