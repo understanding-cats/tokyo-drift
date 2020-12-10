@@ -17,6 +17,7 @@ install:
 
 script:
   - npm run lint
+  - npm run stylecheck
   - npm run test:unit
   - npm run package
   - npm run doc
