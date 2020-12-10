@@ -32,6 +32,10 @@ function displaySessionInfo(){
 
 };
 
+/**
+  * This method based on w3schools' documentation, e.g.
+  * https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_webstorage_local
+  */
 function startsess(){
     if (typeof(Storage) !== "undefined") {
         var work_insec =   60*document.getElementById("pomo_length").value
