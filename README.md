@@ -1,10 +1,7 @@
 # Pomodoro 2: Tokyo Drift
 
-<!-- Scale down image using a containing div, which also centers it.
-     https://stackoverflow.com/a/1733018
--->
-<div align="center" style="width: 200px;">
-<img src="https://raw.githubusercontent.com/understanding-cats/tokyo-drift/main/src/images/tomato_tran.png" />
+<div align="center">
+<img width="300px" src="https://raw.githubusercontent.com/understanding-cats/tokyo-drift/main/src/images/tomato_tran.png" />
 </div>
 
 ## User Documentation
