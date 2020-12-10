@@ -101,7 +101,7 @@ function showNotification (notif_kind) {
 // clock
 function showtime() {
   if (curr_session == 1 && total_secs >= 0) {
-    //working adn remaining secs >0
+    //working and remaining secs >0
     total_secs = total_secs - 1;
     if(total_secs>=0){
       miniclock(total_secs);
