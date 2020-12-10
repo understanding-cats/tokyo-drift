@@ -81,19 +81,20 @@ var total_secs = total_work;
 
 // Show desktop notifications: see https://www.electronjs.org/docs/tutorial/notifications.
 function showNotification (notif_kind) {
-  if(notif_kind==0){
-    new Notification({title: 'Pomodoro Sessions',
-      body: 'Congratulations! All sessions complete.'}).show();
+  var msgText;
+  if (notif_kind == 0){
+    msgText = 'Congratulations! All sessions complete.';
+  } else if (notif_kind == 1) {
+    msgText = 'Completed one working session.';
+  } else if (notif_kind == 2) {
+    msgText = 'Starting one working session.';
+  } else {
+    throw new Error('Unrecognzied notification type.');
   }
-  else if(notif_kind==1){
-    new Notification({title: 'Pomodoro Session',
-      body: 'One working session completes.'}).show();
-  }
-  else if(notif_kind==2){
-    new Notification({title: 'Pomodoro Session',
-      body: 'One working session starts.'}).show();
-  }
-  // more notification kinds could be added here
+  new Notification({
+    title: 'Pomodoro 2: Tokyo Drift',
+    body: msgText
+  }).show();
 }
 
 // clock
