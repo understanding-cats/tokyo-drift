@@ -62,10 +62,11 @@ var total_break = sbreak_insec;
 var total_long_break = lbreak_insec;
 var total_periods = work_periods;
 
+//5 secs for quick end2end testing
 total_work = 5;
 total_break = 5;
-total_long_break = 5;
-total_periods = 2;
+total_long_break = 10;
+total_periods = 5;
 
 var intervalID;
 var curr_session = 0;
