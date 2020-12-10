@@ -1,9 +1,8 @@
 function loadHistory(path) {
   const jsonData = require(path);
-  const allrecords = jsonData.records;
-  // document.getElementById("dummyBtn").innerHTML = jsonData.records[0].task;
 
-  for (const r of allrecords) {
+  for (let recordIdx = 0; recordIdx < jsonData.records.length; recordIdx++) {
+    const r = jsonData.records[recordIdx];
     const startDate = new Date(r.date);
 
     // var itmbtn = document.getElementById("dummyBtn");
