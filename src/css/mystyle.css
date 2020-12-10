@@ -1,37 +1,37 @@
-html{
-  height:100%;
+html {
+  height: 100%;
 }
 body {
   height: 100%;
-  background-color: #F1DCDC;
+  background-color: #f1dcdc;
 }
 
-h1{
+h1 {
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
 }
 
-#status{
-  font-family: 'Courier New', Courier, monospace;
+#status {
+  font-family: "Courier New", Courier, monospace;
   font-size: xx-large;
 }
 
-#count_down{
+#count_down {
   top: 10%;
   left: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
-  
+
   text-align: center;
   font-family: Impact, Charcoal, sans-serif;
   font-size: 40px;
-  color: #FFFFFF;
+  color: #ffffff;
   /*border: 1px solid #000000;*/
 }
 
-.secs{
+.secs {
   position: absolute;
   margin: auto;
   left: 50%;
@@ -39,25 +39,25 @@ h1{
   transform: translate(-50%, -50%);
   /*border: 3px solid #73AD21;*/
 }
-#stat{
-  top:15%;
-  height:10%;
+#stat {
+  top: 15%;
+  height: 10%;
 }
-#mainsec{
-  top:50%;
-  height:60%;
+#mainsec {
+  top: 50%;
+  height: 60%;
 }
 
-#container{
+#container {
   position: relative;
   margin: 0 auto;
-  height:90%;
-  width:60%;
+  height: 90%;
+  width: 60%;
 
   /*border: 1px solid #000000;*/
 }
-#container img{
-  height:100%;
+#container img {
+  height: 100%;
   max-width: 100%;
   max-height: 100%;
   position: absolute;
@@ -66,10 +66,9 @@ h1{
   transform: translate(-50%, -50%);
 
   /*border: 1px solid #000000;*/
-
 }
-#clock{
-  height:25%;
+#clock {
+  height: 25%;
   width: 60%;
   position: absolute;
   top: 55%;
@@ -78,35 +77,34 @@ h1{
   /*border: 1px solid #000000;*/
 }
 
-#control{
+#control {
   position: relative;
   margin: 0 auto;
-  height:15%;
-  width:60%;
+  height: 15%;
+  width: 60%;
 
   /*border: 1px solid #000000;*/
 }
 
-.controls{
-  float:left;
+.controls {
+  float: left;
   margin-left: 9%;
   margin-right: 9%;
   width: 15%;
-  height:100%;
-  background-color: #D3EAEC;
+  height: 100%;
+  background-color: #d3eaec;
   border-radius: 10%;
-  border: 1px solid #FFFFFF;
+  border: 1px solid #ffffff;
   text-align: center;
+}
+.controls:hover {
+  background-color: #a6d5d8;
+}
+.controls:focus {
+  background-color: #a6d5d8;
+}
 
-}
-.controls:hover{
-  background-color: #A6D5D8;
-}
-.controls:focus{
-  background-color: #A6D5D8;
-}
-
-.control{
+.control {
   position: absolute;
   top: 90%;
   left: 50%;
@@ -117,15 +115,14 @@ h1{
   padding-top: 15px;
   padding-bottom: 25px;
 
-  border: 3px solid #73AD21;
+  border: 3px solid #73ad21;
 }
 
-.controls img{
-  height:100%;
-  width:100%;
+.controls img {
+  height: 100%;
+  width: 100%;
   max-width: 100%;
   max-height: 100%;
 
   /*border: 1px solid #000000;*/
 }
-

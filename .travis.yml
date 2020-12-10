@@ -6,7 +6,7 @@ node_js:
 sudo: required
 
 addons:
-    chrome: stable
+  chrome: stable
 
 services:
   - xvfb

@@ -17,7 +17,7 @@ class Session {
    * @return {boolean} True if success else False
    */
   end() {
-  // ...
+    // ...
   }
 
   /**
@@ -25,6 +25,6 @@ class Session {
    * @return {number} id of the session if success.
    */
   store() {
-  // ...
+    // ...
   }
 }

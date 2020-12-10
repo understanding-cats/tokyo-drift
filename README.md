@@ -13,6 +13,7 @@ npm install
 ## Start development
 
 You can start the app with:
+
 ```
 npm start
 ```
@@ -20,6 +21,7 @@ npm start
 The app has hot-reloading for any JS or HTML change. For any change to the electron code, just type `rs` in the electron console.
 
 For debugging, you can add the following statement to your electron window:
+
 ```
 win.webContents.openDevTools()
 ```
@@ -54,11 +56,13 @@ All the documentation should be available after that in the `docs/` directory in
 For the moment, this is only available for Linux distributions.
 
 You can either make a package containing all the files of the app:
+
 ```
 npm run package
 ```
 
 Or you can gather everything into an executable:
+
 ```
 npm run make
 ```

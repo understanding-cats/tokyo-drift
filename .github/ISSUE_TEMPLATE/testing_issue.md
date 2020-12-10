@@ -1,10 +1,9 @@
 ---
 name: Testing issue
 about: Something relating to our automated test system
-title: ''
+title: ""
 labels: testing
-assignees: ''
-
+assignees: ""
 ---
 
 **Describe the issue**

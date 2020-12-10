@@ -1,10 +1,9 @@
 ---
 name: Feature request
 about: Request a feature you'd like to see in the application
-title: ''
+title: ""
 labels: enhancement
-assignees: ''
-
+assignees: ""
 ---
 
 **Describe the feature request**

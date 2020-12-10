@@ -5,37 +5,49 @@
     <title>Pomodoro 2: Tokyo Drift</title>
   </head>
   <body onload="getsettings();">
-    <div class = "banner"><h1 id="status">Set Sessions</h1></div>
+    <div class="banner"><h1 id="status">Set Sessions</h1></div>
 
-    <div class = "container" id = "container1">
-        <div class = "secs" id="result"></div>
-        <div class = "secs" id = "work">
-            <b>I want to work for <input id="pomo_length" type="number" min="1" max="60" value="25" /> minutes. </b>
-        </div>
-    
-        <div class = "secs" id = "shortbreak">
-           <b> Have a short break for <input id="sbreak_length" type="number" min="1" max="60" value="5" /> minutes.</b> 
-        </div>
-        <div class = "secs" id = "longbreak">
-            <b>And have a long break for <input id="lbreak_length" type="number" min="1" max="60" value="15" /> minutes if I finished 4 break sessions. </b>
-       </div>
+    <div class="container" id="container1">
+      <div class="secs" id="result"></div>
+      <div class="secs" id="work">
+        <b
+          >I want to work for
+          <input id="pomo_length" type="number" min="1" max="60" value="25" />
+          minutes.
+        </b>
+      </div>
 
-       <div class = "secs" id = "workperiods">
-        <b>I want to have <input id="work_periods" type="number" min="1" max="60" value="4" /> work periods in total. </b>
-        </div>
+      <div class="secs" id="shortbreak">
+        <b>
+          Have a short break for
+          <input id="sbreak_length" type="number" min="1" max="60" value="5" />
+          minutes.</b
+        >
+      </div>
+      <div class="secs" id="longbreak">
+        <b
+          >And have a long break for
+          <input id="lbreak_length" type="number" min="1" max="60" value="15" />
+          minutes if I finished 4 break sessions.
+        </b>
+      </div>
+
+      <div class="secs" id="workperiods">
+        <b
+          >I want to have
+          <input id="work_periods" type="number" min="1" max="60" value="4" />
+          work periods in total.
+        </b>
+      </div>
     </div>
 
-    <div class = "container" id = "container2">
-        <div class = "button_sec" id = "startsession">
-            <button id="startsession_button" onclick="startsess();">
-                start!
-            </button>
-        </div>
-        <div class = "button_sec" id = "back">
-            <button id="back_button" onclick="back2menu();">
-                back
-            </button>
-        </div>
+    <div class="container" id="container2">
+      <div class="button_sec" id="startsession">
+        <button id="startsession_button" onclick="startsess();">start!</button>
+      </div>
+      <div class="button_sec" id="back">
+        <button id="back_button" onclick="back2menu();">back</button>
+      </div>
     </div>
 
     <script src="../js/setsession.js"></script>
