@@ -1,17 +1,4 @@
 'use strict';
-
-
-
-//console.log(jsonData);
-
-
-//JSON.parse(rawdata)
-
-//{"date":"2020.10.11","task":"pomodoro test","start":"12-13","wlength":300,"blength":60,"periods":4}
-/* <p>Task: "Putting together a pitch for CSE 210"</p>
-<p>Started work at 12:30 AM.</p>
-<p>4 work periods of length 25 minutes</p>
-<p>separated by 5-minute breaks.</p>   */
 function loadHistory(path){
 
     let jsonData = require(path);
