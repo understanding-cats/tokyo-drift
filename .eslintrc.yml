@@ -16,4 +16,5 @@ rules:
     "no-unused-vars": "off",
     "no-useless-constructor": "off",
     "class-methods-use-this": "off",
+    "no-plusplus": "off",
   }
