@@ -79,7 +79,7 @@ var curr_workperiod = 0;
 var total_secs = total_work;
 //total_secs is whatever displays on the clock
 
-// desktop notification
+// Show desktop notifications: see https://www.electronjs.org/docs/tutorial/notifications.
 function showNotification (notif_kind) {
   if(notif_kind==0){
     new Notification({title: 'Pomodoro Sessions',
