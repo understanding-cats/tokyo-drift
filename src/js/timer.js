@@ -3,7 +3,7 @@ const { ipcRenderer } = require('electron');
 
 const timerBox = document.getElementById('timerBox');
 
-var timeObject = {
+let timeObject = {
   hours: 0,
   minutes: 0,
   seconds: 0,
@@ -14,7 +14,7 @@ const setTimer = () => {
 };
 
 const emptyTimer = () => (
-  timeObject.hours == 0 && timeObject.minutes == 0 && timeObject.seconds == 0
+  timeObject.hours === 0 && timeObject.minutes === 0 && timeObject.seconds === 0
 );
 
 const initTime = () => {
@@ -24,9 +24,9 @@ const initTime = () => {
 };
 
 const passOneSecond = () => {
-  if (timeObject.seconds == 0) {
+  if (timeObject.seconds === 0) {
     timeObject.seconds = 59;
-    if (timeObject.minutes == 0) {
+    if (timeObject.minutes === 0) {
       timeObject.minutes = 59;
       timeObject.hours--;
     } else {
