@@ -1,3 +1,5 @@
+// This code adapted from Electron's "first app" tutorial, e.g.
+// https://github.com/electron/electron/blob/v11.0.4/docs/tutorial/first-app.md
 const { app, BrowserWindow, Notification } = require("electron");
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
