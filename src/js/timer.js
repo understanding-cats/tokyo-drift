@@ -3,7 +3,12 @@ const { ipcRenderer } = require('electron');
 
 const timerBox = document.getElementById('timerBox');
 
-let timeObject = {
+// This object is repeatedly updated by the code in this module. I know it
+// looks weird, then, that this is declared using const (and not var or let),
+// but ESLint yells at me if we do it using var, and if we use let then ESLint
+// complains that "oh timeObject is never reassigned, use const instead".
+// So... it's a constant.
+const timeObject = {
   hours: 0,
   minutes: 0,
   seconds: 0,
