@@ -3,7 +3,7 @@ module.exports = {
   // that runs in the main process.
   entry: {
     app: "./src/main.js",
-    timer: "./src/timer.js",
+    timer: "./src/js/timer.js",
   },
   // Put your normal webpack config below here
   module: {
