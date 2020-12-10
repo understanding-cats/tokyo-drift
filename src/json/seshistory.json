@@ -1,0 +1,20 @@
+{
+   "records":[
+      {
+         "date":"2020-10-11",
+         "task":"pomodoro test",
+         "start":"12:13",
+         "wlength":300,
+         "blength":60,
+         "periods":4
+      },
+      {
+         "date":"2019-10-11",
+         "task":"pomodoro test2",
+         "start":"09:30",
+         "wlength":360,
+         "blength":120,
+         "periods":3
+      }
+   ]
+}
