@@ -137,7 +137,7 @@ function showtime() {
     if (curr_workperiod == total_periods){
       clearInterval(intervalID);
       showNotification(0); // show desktop notification for all sessions end
-      var r = confirm("Session complete! Go back to manu? ");
+      var r = confirm("Sessions complete! Go back to menu?");
       if (r == true){
         location.href = "../home.html";
       }else{
