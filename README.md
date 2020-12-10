@@ -1,8 +1,10 @@
-# Tokyo-drift
+# Pomodoro 2: Tokyo Drift
+
+![](https://raw.githubusercontent.com/understanding-cats/tokyo-drift/main/src/images/tomato_tran.png)
 
 ## Installation
 
-You need nodeJS installed on your machine.
+You need Node.js installed on your machine.
 
 ```
 npm install
@@ -30,15 +32,12 @@ npm run lint
 
 ## Run tests
 
+All the tests should be in the `test/` directory.
+
 ```
+# Runs all tests
 npm run test:all
-```
-
-All the test should be in the `/test` directory.
-
-If you want to run only the unit tests:
-
-```
+# Runs just the unit tests
 npm run test:unit
 ```
 
@@ -48,7 +47,7 @@ npm run test:unit
 npm run doc
 ```
 
-All the documentation should be available after that in the `/docs` directory in the HTML file format.
+All the documentation should be available after that in the `docs/` directory in the HTML file format.
 
 ## Build the application
 
@@ -64,4 +63,4 @@ Or you can gather everything into an executable:
 npm run make
 ```
 
-All the result will be available in the `/out` directory.
+All the result will be available in the `out/` directory.
