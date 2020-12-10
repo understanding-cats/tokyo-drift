@@ -1,5 +1,5 @@
 
-function back2manu(){
+function back2menu(){
     location.href = "../home.html";
 
 };
