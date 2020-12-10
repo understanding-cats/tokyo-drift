@@ -24,4 +24,4 @@
 //    });
 //   ```
 
-import '../index.css';
+import '../css/index.css';
