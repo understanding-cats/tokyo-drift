@@ -3,6 +3,8 @@ const assert = require('assert')
 const electronPath = require('electron') // Require Electron from the binaries included in node_modules.
 const path = require('path')
 
+// Adapted from the examples given in Spectron's README:
+// https://github.com/electron-userland/spectron
 describe('Application launch', function () {
   this.timeout(10000)
 
