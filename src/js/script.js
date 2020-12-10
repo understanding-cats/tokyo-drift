@@ -33,9 +33,9 @@ function getsessioninfo(){
   var sbreak_insec = localStorage.getItem('sbreak_ls') || 5*60;
   var lbreak_insec = localStorage.getItem('lbreak_ls') || 15*60;
   var work_periods = localStorage.getItem('periods_ls') || 4;
-  document.getElementById("worktime").innerText = "Work Session: "+ work_insec/60 + "mins";
-  document.getElementById("shortbreak").innerText = "Short Break: "+ sbreak_insec/60 + "mins";
-  document.getElementById("longbreak").innerText = "Long Break: "+ lbreak_insec/60 + "mins";
+  document.getElementById("worktime").innerText = "Work Session: "+ work_insec/60 + " mins";
+  document.getElementById("shortbreak").innerText = "Short Break: "+ sbreak_insec/60 + " mins";
+  document.getElementById("longbreak").innerText = "Long Break: "+ lbreak_insec/60 + " mins";
   document.getElementById("workp").innerText = "Work Periods: "+ work_periods;
   document.getElementById("pomo_length").value = work_insec/60;
   document.getElementById("sbreak_length").value = sbreak_insec/60;
