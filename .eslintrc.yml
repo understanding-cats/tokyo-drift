@@ -17,4 +17,7 @@ rules:
     "no-useless-constructor": "off",
     "class-methods-use-this": "off",
     "no-plusplus": "off",
+    # TODO: reenable this one in the future. It's needed r/n so that
+    # stuff like "location" and "window" are usable
+    "no-restricted-globals": "off",
   }
