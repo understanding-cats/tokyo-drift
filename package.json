@@ -12,7 +12,9 @@
     "lint": "eslint --ext .js .",
     "doc": "documentation build src/** -f html -o docs",
     "test:all": "xvfb-maybe mocha --recursive --exit",
-    "test:unit": "xvfb-maybe mocha --recursive test/unit"
+    "test:unit": "xvfb-maybe mocha --recursive test/unit",
+    "style": "prettier --write .",
+    "stylecheck": "prettier --check ."
   },
   "keywords": [],
   "author": {
@@ -83,6 +85,7 @@
     "eslint-plugin-import": "^2.22.1",
     "mocha": "^8.2.1",
     "node-loader": "^1.0.2",
+    "prettier": "^2.2.1",
     "spectron": "^12.0.0",
     "style-loader": "^1.3.0",
     "xvfb-maybe": "^0.2.1"

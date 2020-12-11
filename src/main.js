@@ -1,3 +1,5 @@
+// This code adapted from Electron's "first app" tutorial, e.g.
+// https://github.com/electron/electron/blob/v11.0.4/docs/tutorial/first-app.md
 const { app, BrowserWindow, Notification } = require("electron");
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -9,6 +11,7 @@ if (require("electron-squirrel-startup")) {
 let mainWindow;
 const url = require("url");
 const path = require("path");
+
 const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -16,7 +19,7 @@ const createWindow = () => {
     height: 600,
     webPreferences: {
       nodeIntegration: true,
-      enableRemoteModule: true
+      enableRemoteModule: true,
     },
   });
 

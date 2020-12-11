@@ -1,18 +1,27 @@
 // Require ipcRender
 const { ipcRenderer } = require("electron");
 
-let timerBox = document.getElementById("timerBox");
+const timerBox = document.getElementById("timerBox");
+
+// This object is repeatedly updated by the code in this module. I know it
+// looks weird, then, that this is declared using const (and not var or let),
+// but ESLint yells at me if we do it using var, and if we use let then ESLint
+// complains that "oh timeObject is never reassigned, use const instead".
+// So... it's a constant.
+const timeObject = {
+  hours: 0,
+  minutes: 0,
+  seconds: 0,
+};
 
 const setTimer = () => {
-  timerBox.innerHTML =
-    timeObject.hours + ":" + timeObject.minutes + ":" + timeObject.seconds;
+  timerBox.innerHTML = `${timeObject.hours}:${timeObject.minutes}:${timeObject.seconds}`;
 };
 
-const emptyTimer = () => {
-  return (
-    timeObject.hours == 0 && timeObject.minutes == 0 && timeObject.seconds == 0
-  );
-};
+const emptyTimer = () =>
+  timeObject.hours === 0 &&
+  timeObject.minutes === 0 &&
+  timeObject.seconds === 0;
 
 const initTime = () => {
   timeObject.hours = 0;
@@ -20,16 +29,10 @@ const initTime = () => {
   timeObject.seconds = 5;
 };
 
-var timeObject = {
-  hours: 0,
-  minutes: 0,
-  seconds: 0,
-};
-
 const passOneSecond = () => {
-  if (timeObject.seconds == 0) {
+  if (timeObject.seconds === 0) {
     timeObject.seconds = 59;
-    if (timeObject.minutes == 0) {
+    if (timeObject.minutes === 0) {
       timeObject.minutes = 59;
       timeObject.hours--;
     } else {
@@ -46,7 +49,7 @@ ipcRenderer.on("timer-change", (event, t) => {
   setTimer();
 
   // Execute every second
-  let timerIntervalId = setInterval(() => {
+  const timerIntervalId = setInterval(() => {
     passOneSecond();
     setTimer();
     if (emptyTimer()) {

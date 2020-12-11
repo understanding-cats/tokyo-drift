@@ -6,7 +6,7 @@ node_js:
 sudo: required
 
 addons:
-    chrome: stable
+  chrome: stable
 
 services:
   - xvfb
@@ -17,8 +17,10 @@ install:
 
 script:
   - npm run lint
+  - npm run stylecheck
   - npm run test:unit
-  - npm run package
+  # TODO: re-enable
+  # - npm run package
   - npm run doc
 
 cache:

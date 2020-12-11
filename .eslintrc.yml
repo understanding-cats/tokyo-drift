@@ -6,15 +6,29 @@ env:
 extends:
   - airbnb-base
 settings:
-  import/core-modules: [ electron ]
-globals: {
-    'MAIN_WINDOW_WEBPACK_ENTRY': true
-}
+  import/core-modules: [electron]
+globals: { "MAIN_WINDOW_WEBPACK_ENTRY": true }
 parserOptions:
   ecmaVersion: 12
 rules: {
-  "global-require": "off",
-  "no-unused-vars": "off",
-  "no-useless-constructor": "off",
-  "class-methods-use-this": "off",
-}
+    "global-require": "off",
+    "no-unused-vars": "off",
+    "no-useless-constructor": "off",
+    "class-methods-use-this": "off",
+    "no-plusplus": "off",
+    # TODO: reenable this one in the future. It's needed r/n so that
+    # stuff like "location" and "window" are usable
+    "no-restricted-globals": "off",
+    # TODO: also reenable this, probably. We only use it so that we can
+    # dynamically load a file in savesession.js, and in the future we should
+    # do this using Electron's file APIs
+    "import/no-dynamic-require": "off",
+    # The following are some rules where prettier and eslint (or at least the
+    # Airbnb settings for eslint) disagree, as of writing. To make life easier,
+    # we just delegate to prettier for most of these (so even though the Airbnb
+    # rules say to use single quotes, we override that here).
+    "quotes": ["error", "double"],
+    "comma-dangle": "off",
+    "operator-linebreak": "off",
+    "implicit-arrow-linebreak": "off",
+  }
