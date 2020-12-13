@@ -3,6 +3,9 @@ function back2menu() {
 }
 
 function goToPomo() {
+  const s_name = document.getElementById("sessionName").value
+  localStorage.setItem("session_name", s_name);
+  // writeToFile("seshistory.json",'2000-01-02',s_name,'11:11',300,60,4)
   location.href = "html/pomodoro.html";
 }
 
@@ -44,7 +47,7 @@ function startsess() {
     const workInSec = 60 * document.getElementById("pomo_length").value;
     const sbreakInSec = 60 * document.getElementById("sbreak_length").value;
     const lbreakInSec = 60 * document.getElementById("lbreak_length").value;
-    const workPeriods = document.getElementById("work_periods").value;
+    const workPeriods = 1 * document.getElementById("work_periods").value;
     localStorage.setItem("work_ls", workInSec);
     localStorage.setItem("sbreak_ls", sbreakInSec);
     localStorage.setItem("lbreak_ls", lbreakInSec);
