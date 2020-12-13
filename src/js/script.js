@@ -26,6 +26,31 @@ function miniclock(secs) {
     sec
   )}`;
 }
+//modify from https://stackoverflow.com/questions/36856232/write-add-data-in-json-file-using-node-js/36857101
+function writeToFile(jsonpath,taskDate,taskName,taskStart,workLength,breakLength,allPeriods){
+  const fs = window.require('fs');
+  const path = window.require('path');
+  console.log("you are here");
+  var jPath = path.join(__dirname,'..','json', jsonpath);
+  console.log(jPath);
+  fs.readFile(jPath, 'utf8', function readFileCallback(err, data){
+    if (err){
+        console.log(err);
+    } else {
+      obj = JSON.parse(data); 
+      n_record = {
+        date: taskDate,
+        task: taskName,
+        start: taskStart,
+        wlength: workLength,
+        blength: breakLength,
+        periods: allPeriods
+      }
+      obj.records.push(n_record);
+      json = JSON.stringify(obj,null,4);
+      fs.writeFileSync(jPath, json); // write it back 
+    }});
+}
 
 /// ***************************
 
@@ -52,10 +77,16 @@ function getsessioninfo() {
 }
 
 // On page load, get all session info
+const taskName = localStorage.getItem("session_name") || "Default Pomodoro Session";
 const workInSec = localStorage.getItem("work_ls") || 25 * 60;
 const sbreakInSec = localStorage.getItem("sbreak_ls") || 5 * 60;
 const lbreakInSec = localStorage.getItem("lbreak_ls") || 15 * 60;
 const workPeriods = localStorage.getItem("periods_ls") || 4;
+let currDate = new Date();
+let workDate = currDate.toLocaleDateString();
+//console.log(workDate);
+let workTime = currDate.toLocaleTimeString();
+//console.log(workTime);
 
 document.getElementById("currworktime").innerText = `Work Session: ${
   workInSec / 60
@@ -71,16 +102,19 @@ document.getElementById("currworkp").innerText = `Work Periods: ${workPeriods}`;
 miniclock(workInSec);
 
 // TODO: totalWork = work_incec etc.
-let totalWork = workInSec;
-let totalBreak = sbreakInSec;
-let totalLongBreak = lbreakInSec;
-let totalPeriods = workPeriods;
+let totalWork = parseInt(workInSec);
+let totalBreak = parseInt(sbreakInSec);
+let totalLongBreak = parseInt(lbreakInSec);
+let totalPeriods = parseInt(workPeriods);
+
+console.log(totalPeriods);
+console.log(typeof totalPeriods);
 
 // 5 secs for quick end2end testing
-totalWork = 5;
-totalBreak = 5;
-totalLongBreak = 10;
-totalPeriods = 5;
+//  totalWork = 5;
+//  totalBreak = 5;
+//  totalLongBreak = 10;
+ //totalPeriods = 1;
 
 let intervalID;
 let currSession = 0;
@@ -152,8 +186,11 @@ function showtime() {
   if (currSession === 2 && totalSecs < 0) {
     // if breaking and no remaining secs
     // miniclock(totalSecs);
+    console.log(currWorkPeriod);
     if (currWorkPeriod === totalPeriods) {
+      console.log("terminate");
       clearInterval(intervalID);
+      writeToFile("seshistory.json",workDate,taskName,workTime,workInSec,sbreakInSec,workPeriods);
       showNotification(0); // show desktop notification for all sessions end
       const r = confirm("Sessions complete! Go back to menu?");
       if (r) {
@@ -177,6 +214,9 @@ function showtime() {
 function start() {
   if ((currSession === 0 || currSession === 4) && totalSecs >= 0) {
     if (currSession === 0) {
+      currDate = new Date();
+      workDate = currDate.toLocaleDateString();
+      workTime = currDate.toLocaleTimeString();
       currWorkPeriod = 1;
     }
     currSession = 1;
