@@ -84,7 +84,6 @@ const lbreakInSec = localStorage.getItem("lbreak_ls") || 15 * 60;
 const workPeriods = localStorage.getItem("periods_ls") || 4;
 let currDate = new Date();
 let workDate = currDate.toLocaleDateString();
-//console.log(workDate);
 let workTime = currDate.toLocaleTimeString();
 //console.log(workTime);
 
