@@ -121,6 +121,7 @@ function takeBreak(secs) {
   document.getElementById("tomato_img").src = "../images/tomatoblue_tran.png";
   return { secs, currStatus: sessionStatusObj.BREAK };
 }
+<<<<<<< HEAD
 
 /**
  * This function is called every second by setInterval().
@@ -138,6 +139,18 @@ function showtime() {
   if (currSession === sessionStatusObj.WORKING) {
     if (totalSecs > 0) {
       totalSecs = decreaseTime(totalSecs);
+=======
+// Modified from https://stackoverflow.com/questions/36856232/write-add-data-in-json-file-using-node-js/36857101.
+function writeToFile(jsonpath,taskDate,taskName,taskStart,workLength,breakLength,allPeriods){
+  const fs = window.require('fs');
+  const path = window.require('path');
+  console.log("you are here");
+  var jPath = path.join(__dirname,'..','json', jsonpath);
+  console.log(jPath);
+  fs.readFile(jPath, 'utf8', function readFileCallback(err, data){
+    if (err){
+        console.log(err);
+>>>>>>> 6784aa2 (Update src/js/script.js)
     } else {
       // working and remaining secs <= 0
       breakUpdates = takeBreak(totalSecs);
