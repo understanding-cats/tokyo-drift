@@ -3,9 +3,8 @@ function back2menu() {
 }
 
 function goToPomo() {
-  const s_name = document.getElementById("sessionName").value
-  localStorage.setItem("session_name", s_name);
-  // writeToFile("seshistory.json",'2000-01-02',s_name,'11:11',300,60,4)
+  const sName = document.getElementById("sessionName").value;
+  localStorage.setItem("session_name", sName);
   location.href = "html/pomodoro.html";
 }
 
