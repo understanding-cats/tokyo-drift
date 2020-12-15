@@ -85,7 +85,6 @@ const workPeriods = localStorage.getItem("periods_ls") || 4;
 let currDate = new Date();
 let workDate = currDate.toLocaleDateString();
 let workTime = currDate.toLocaleTimeString();
-//console.log(workTime);
 
 document.getElementById("currworktime").innerText = `Work Session: ${
   workInSec / 60
