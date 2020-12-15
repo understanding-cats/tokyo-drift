@@ -182,9 +182,7 @@ function showtime() {
   if (currSession === 2 && totalSecs < 0) {
     // if breaking and no remaining secs
     // miniclock(totalSecs);
-    console.log(currWorkPeriod);
     if (currWorkPeriod === totalPeriods) {
-      console.log("terminate");
       clearInterval(intervalID);
       writeToFile("seshistory.json",workDate,taskName,workTime,workInSec,sbreakInSec,workPeriods);
       showNotification(0); // show desktop notification for all sessions end
