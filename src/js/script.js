@@ -192,6 +192,7 @@ function cancelAll() {
 }
 
 // On page load, get all session info
+<<<<<<< HEAD
 const taskName =
   localStorage.getItem("session_name") || "Default Pomodoro Session";
 const {
@@ -205,6 +206,29 @@ let workDate = currDateOnPageLoad.toLocaleDateString();
 let workTime = currDateOnPageLoad.toLocaleTimeString();
 
 updateClock(workInSec);
+=======
+const taskName = localStorage.getItem("session_name") || "Default Pomodoro Session";
+const workInSec = localStorage.getItem("work_ls") || 25 * 60;
+const sbreakInSec = localStorage.getItem("sbreak_ls") || 5 * 60;
+const lbreakInSec = localStorage.getItem("lbreak_ls") || 15 * 60;
+const workPeriods = localStorage.getItem("periods_ls") || 4;
+let currDate = new Date();
+let workDate = currDate.toLocaleDateString();
+let workTime = currDate.toLocaleTimeString();
+
+document.getElementById("currworktime").innerText = `Work Session: ${
+  workInSec / 60
+} mins`;
+document.getElementById("currshortbreak").innerText = `Short Break: ${
+  sbreakInSec / 60
+} mins`;
+document.getElementById("currlongbreak").innerText = `Long Break: ${
+  lbreakInSec / 60
+} mins`;
+document.getElementById("currworkp").innerText = `Work Periods: ${workPeriods}`;
+
+miniclock(workInSec);
+>>>>>>> a0d4157 (Update src/js/script.js)
 
 // TODO: totalWork = work_incec etc.
 let totalWork = parseInt(workInSec, 10);
