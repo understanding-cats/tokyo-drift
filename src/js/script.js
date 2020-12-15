@@ -34,7 +34,7 @@ function writeToFile(jsonpath,taskDate,taskName,taskStart,workLength,breakLength
   console.log(jPath);
   fs.readFile(jPath, 'utf8', function readFileCallback(err, data){
     if (err){
-        console.log(err);
+        throw err;
     } else {
       obj = JSON.parse(data); 
       n_record = {
