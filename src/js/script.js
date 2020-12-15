@@ -107,9 +107,6 @@ let totalBreak = parseInt(sbreakInSec);
 let totalLongBreak = parseInt(lbreakInSec);
 let totalPeriods = parseInt(workPeriods);
 
-console.log(totalPeriods);
-console.log(typeof totalPeriods);
-
 // 5 secs for quick end2end testing
 //  totalWork = 5;
 //  totalBreak = 5;
