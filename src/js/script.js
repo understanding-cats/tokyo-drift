@@ -30,7 +30,6 @@ function miniclock(secs) {
 function writeToFile(jsonpath,taskDate,taskName,taskStart,workLength,breakLength,allPeriods){
   const fs = window.require('fs');
   const path = window.require('path');
-  console.log("you are here");
   var jPath = path.join(__dirname,'..','json', jsonpath);
   console.log(jPath);
   fs.readFile(jPath, 'utf8', function readFileCallback(err, data){
