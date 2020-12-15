@@ -26,7 +26,7 @@ function miniclock(secs) {
     sec
   )}`;
 }
-//modify from https://stackoverflow.com/questions/36856232/write-add-data-in-json-file-using-node-js/36857101
+// Modified from https://stackoverflow.com/questions/36856232/write-add-data-in-json-file-using-node-js/36857101.
 function writeToFile(jsonpath,taskDate,taskName,taskStart,workLength,breakLength,allPeriods){
   const fs = window.require('fs');
   const path = window.require('path');
