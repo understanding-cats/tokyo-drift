@@ -1,0 +1,30 @@
+<div class="modal-content">
+  <span class="close" onclick="closeModal('SetSessionModal')">x</span>
+
+  <b
+    >I want to work for
+    <input id="pomo_length" type="number" min="1" max="60" value="25" />
+    minutes. </b
+  ><br />
+
+  <b>
+    Have a short break for
+    <input id="sbreak_length" type="number" min="1" max="60" value="5" />
+    minutes.</b
+  >
+  <br />
+
+  <b
+    >And have a long break for
+    <input id="lbreak_length" type="number" min="1" max="60" value="15" />
+    minutes if I finished 4 break sessions. </b
+  ><br />
+
+  <b
+    >I want to have
+    <input id="work_periods" type="number" min="1" max="60" value="4" />
+    work periods in total. </b
+  ><br />
+
+  <button onclick="settings.setSettings()">GO!</button>
+</div>

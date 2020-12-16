@@ -1,59 +1,35 @@
-// Require ipcRender
-const { ipcRenderer } = require("electron");
-
-const timerBox = document.getElementById("timerBox");
-
-// This object is repeatedly updated by the code in this module. I know it
-// looks weird, then, that this is declared using const (and not var or let),
-// but ESLint yells at me if we do it using var, and if we use let then ESLint
-// complains that "oh timeObject is never reassigned, use const instead".
-// So... it's a constant.
-const timeObject = {
-  hours: 0,
-  minutes: 0,
-  seconds: 0,
-};
-
-const setTimer = () => {
-  timerBox.innerHTML = `${timeObject.hours}:${timeObject.minutes}:${timeObject.seconds}`;
-};
-
-const emptyTimer = () =>
-  timeObject.hours === 0 &&
-  timeObject.minutes === 0 &&
-  timeObject.seconds === 0;
-
-const initTime = () => {
-  timeObject.hours = 0;
-  timeObject.minutes = 0;
-  timeObject.seconds = 5;
-};
-
-const passOneSecond = () => {
-  if (timeObject.seconds === 0) {
-    timeObject.seconds = 59;
-    if (timeObject.minutes === 0) {
-      timeObject.minutes = 59;
-      timeObject.hours--;
-    } else {
-      timeObject.minutes--;
+function start() {
+  if ((currSession === 0 || currSession === 4) && totalSecs >= 0) {
+    if (currSession === 0) {
+      currDate = new Date();
+      workDate = currDate.toLocaleDateString();
+      workTime = currDate.toLocaleTimeString();
+      currWorkPeriod = 1;
     }
-  } else {
-    timeObject.seconds--;
+    currSession = 1;
+    // document.body.style.backgroundColor = "#F1DCDC";
+    // document.getElementById("tomato_img").src = "tomato_tran.png";
+    intervalID = setInterval(showtime, 1000);
   }
-};
+  if (currSession === 5 && totalSecs >= 0) {
+    currSession = 2;
+    intervalID = setInterval(showtime, 1000);
+  }
+}
 
-// Listen to the 'timer-change' event
-ipcRenderer.on("timer-change", (event, t) => {
-  initTime();
-  setTimer();
+function stop() {
+  if (currSession === 0) {
+    return;
+  }
+  if (currSession === 1) {
+    currSession = 4;
+  }
+  if (currSession === 2) {
+    currSession = 5;
+  }
 
-  // Execute every second
-  const timerIntervalId = setInterval(() => {
-    passOneSecond();
-    setTimer();
-    if (emptyTimer()) {
-      clearInterval(timerIntervalId);
-    }
-  }, 1000); // 1 second
-});
+  clearInterval(intervalID);
+  document.getElementById("status").innerHTML = "Pause";
+}
+
+module.exports = { start, stop };
