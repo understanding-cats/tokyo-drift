@@ -22,7 +22,14 @@ function setSettings() {
   };
 }
 
-/** This function get settings from localstorage. If no prior settings exist, it uses default settings.
+/**
+ * This function get settings from localstorage.
+ *
+ * If no prior settings exist, it uses default settings.
+ *
+ * As a TODO, we may want to add some explicit validation that the settings
+ * retrieved (if any settings are retrieved) are sane.
+ *
  * @returns workInSec, sbreakInSec, lbreakInSec, workPeriods
  */
 function getSettings() {
@@ -31,7 +38,7 @@ function getSettings() {
   const lbreakInSec = localStorage.getItem("lbreak_ls") || 15 * 60;
   const workPeriods = localStorage.getItem("periods_ls") || 4;
 
-  // check if the element has been load
+  // check if the element has been loaded
   if (document.getElementById("worktime")) {
     displaySessionSettings(workInSec, sbreakInSec, lbreakInSec, workPeriods);
   }
@@ -39,10 +46,10 @@ function getSettings() {
     displaySettings(workInSec, sbreakInSec, lbreakInSec, workPeriods);
   }
   return {
-    workInSec: workInSec,
-    sbreakInSec: sbreakInSec,
-    lbreakInSec: lbreakInSec,
-    workPeriods: workPeriods,
+    workInSec: parseInt(workInSec),
+    sbreakInSec: parseInt(sbreakInSec),
+    lbreakInSec: parseInt(lbreakInSec),
+    workPeriods: parseInt(workPeriods),
   };
 }
 /** This function display current settings as place holders in input box.
