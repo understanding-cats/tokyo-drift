@@ -26,11 +26,13 @@ h1 {
   top: 10%;
   left: 50%;
   position: absolute;
+  transform: translate(-50%, -50%);
 
   text-align: center;
   font-family: Impact, Charcoal, sans-serif;
   font-size: 40px;
   color: #ffffff;
+  /*border: 1px solid #000000;*/
 }
 
 .secs {
@@ -38,6 +40,8 @@ h1 {
   margin: auto;
   left: 50%;
   width: 75%;
+  transform: translate(-50%, -50%);
+  /*border: 3px solid #73AD21;*/
 }
 #stat {
   top: 15%;
@@ -53,6 +57,8 @@ h1 {
   margin: 0 auto;
   height: 90%;
   width: 60%;
+
+  /*border: 1px solid #000000;*/
 }
 #container img {
   height: 100%;
@@ -61,6 +67,9 @@ h1 {
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
+
+  /*border: 1px solid #000000;*/
 }
 #clock {
   height: 25%;
@@ -68,6 +77,8 @@ h1 {
   position: absolute;
   top: 55%;
   left: 50%;
+  transform: translate(-50%, -50%);
+  /*border: 1px solid #000000;*/
 }
 
 #control {
@@ -75,6 +86,8 @@ h1 {
   margin: 0 auto;
   height: 15%;
   width: 60%;
+
+  /*border: 1px solid #000000;*/
 }
 
 .controls {
@@ -101,6 +114,7 @@ h1 {
   left: 50%;
   width: 50%;
   height: 20%;
+  transform: translate(-50%, -50%);
 
   padding-top: 15px;
   padding-bottom: 25px;
