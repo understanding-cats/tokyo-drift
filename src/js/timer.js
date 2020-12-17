@@ -35,7 +35,7 @@ function stop() {
   }
 
   clearInterval(intervalID);
-  document.getElementById("status").innerHTML = "Pause";
+  document.getElementById("status").innerHTML = "Paused.";
 }
 
 module.exports = { start, stop };

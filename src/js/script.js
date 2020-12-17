@@ -3,17 +3,8 @@ const { remote, session } = require("electron");
 const timer = require("../js/timer");
 const { sessionStatus, storeSessionToFile } = require("../js/session");
 const settings = require("../js/settings");
+const utils = require("../js/utils");
 const notification = require("../js/notification");
-
-//* ** utility functions ***
-
-/** utility function that pads number with zeros at the front to make it 2 digits.
- * @param {number} num
- */
-function padzero(num) {
-  const s = `00${num}`;
-  return s.substr(s.length - 2);
-}
 
 /** Displays current session status on html page
  * @param {object} sessionStatus - Object for current session status
@@ -37,18 +28,15 @@ function showstatus(sessionStatus, periodNum) {
   }
 }
 
-/** Displays remaining time in minutes:seconds
- * @param {number} secs - Remaining secs in current session
+/**
+ * Displays remaining time in MM:SS format.
+ *
+ * @param {number} secs Remaining seconds in current session.
  */
-function miniclock(secs) {
-  if (secs < 0) {
-    secs = 0;
-  }
-  const min = Math.floor(secs / 60);
-  const sec = Math.floor(secs % 60);
-  document.getElementById("count_down").innerHTML = `${padzero(min)}:${padzero(
-    sec
-  )}`;
+function updateClock(secs) {
+  document.getElementById(
+    "count_down"
+  ).innerHTML = utils.secsToHumanReadableTime(secs);
 }
 
 /** reload current page.
@@ -149,7 +137,7 @@ function showtime() {
       totalSecs = decreaseTime(totalSecs);
     } else {
       // if breaking and no remaining secs
-      // miniclock(totalSecs);
+      // updateClock(totalSecs);
       if (currWorkPeriod === totalPeriods) {
         finishSessions();
       } else {
@@ -161,7 +149,7 @@ function showtime() {
     }
   }
   showstatus(currSession, currWorkPeriod);
-  miniclock(totalSecs);
+  updateClock(totalSecs);
 }
 
 /** Ask user to confirm action when click cancel
@@ -184,15 +172,11 @@ const {
   lbreakInSec,
   workPeriods,
 } = settings.getSettings();
-// const workInSec = localStorage.getItem("work_ls") || 25 * 60;
-// const sbreakInSec = localStorage.getItem("sbreak_ls") || 5 * 60;
-// const lbreakInSec = localStorage.getItem("lbreak_ls") || 15 * 60;
-// const workPeriods = localStorage.getItem("periods_ls") || 4;
 let currDate = new Date();
 let workDate = currDate.toLocaleDateString();
 let workTime = currDate.toLocaleTimeString();
 
-miniclock(workInSec);
+updateClock(workInSec);
 
 // TODO: totalWork = work_incec etc.
 let totalWork = parseInt(workInSec);
