@@ -77,7 +77,11 @@ function finishSessions() {
   ); // show desktop notification for all sessions end
   const r = confirm("Sessions complete! Go back to menu?");
   if (r) {
-    location.href = "home.html";
+    // pages.js isn't a module -- it's just a set of global functions, because
+    // its functions are used as callbacks. So we just kind of call goToMenu()
+    // directly. (Ideally we would set the HTML callbacks from within the JS
+    // code, avoiding this problem.)
+    goToMenu();
   } else {
     clearAll();
   }
@@ -172,7 +176,7 @@ function cancelAll() {
   timer.stop();
   const r = confirm("Are you sure you want to cancel the current session?");
   if (r) {
-    location.href = "home.html";
+    goToMenu();
   }
 }
 
