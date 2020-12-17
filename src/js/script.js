@@ -197,9 +197,9 @@ let totalLongBreak = parseInt(lbreakInSec);
 let totalPeriods = parseInt(workPeriods);
 
 // 5 secs for quick end2end testing
-totalWork = 5;
-totalBreak = 5;
-//  totalLongBreak = 10;
+//totalWork = 5;
+//totalBreak = 1;
+//totalLongBreak = 10;
 //totalPeriods = 1;
 
 let intervalID;
