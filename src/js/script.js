@@ -98,7 +98,11 @@ function startWorkSession(workPeriod) {
   secs = totalWork - 1;
   document.body.style.backgroundColor = "#F1DCDC";
   document.getElementById("tomato_img").src = "../images/tomato_tran.png";
-  return { workPeriod: workPeriod + 1, currStatus: sessionStatus.WORKING, secs: secs };
+  return {
+    workPeriod: workPeriod + 1,
+    currStatus: sessionStatus.WORKING,
+    secs: secs,
+  };
 }
 
 /**
