@@ -69,6 +69,9 @@ function secsToHumanReadableTime(secs) {
     if (secs < 0) {
       secs = 0;
     } else if (secs > 5999) {
+      throw new Error(
+        "Input to secsToHumanReadableTime must be an integer <= 5,999."
+      );
     }
     const min = Math.floor(secs / 60);
     const sec = Math.floor(secs % 60);

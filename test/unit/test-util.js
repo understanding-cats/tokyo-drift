@@ -94,5 +94,18 @@ describe("Utils", function () {
         }, /Input to secsToHumanReadableTime must be an integer\./);
       }
     });
+    it("Throws an error if an integer > 5,999 is passed", function () {
+      const badStuff = [
+        6000,
+        9001,
+        Number.MAX_SAFE_INTEGER,
+        Number.MAX_SAFE_INTEGER + 5,
+      ];
+      for (const b of badStuff) {
+        assert.throws(function () {
+          utils.secsToHumanReadableTime(b);
+        }, /Input to secsToHumanReadableTime must be an integer <= 5,999\./);
+      }
+    });
   });
 });
