@@ -7,22 +7,22 @@ const utils = require("../js/utils");
 const notification = require("../js/notification");
 
 /** Displays current session status on html page
- * @param {object} sessionStatus - Object for current session status
+ * @param {object} currStatus - Object for current session status
  * @param {number} periodNum - current period number
  */
-function showstatus(sessionStatus, periodNum) {
-  if (sessionStatus === sessionStatus.NOSESSION) {
+function showstatus(currStatus, periodNum) {
+  if (currStatus === sessionStatus.NOSESSION) {
     document.getElementById("status").innerText = `Pomodoro${periodNum}`;
   }
   if (
-    sessionStatus === sessionStatus.WORKING ||
-    sessionStatus === sessionStatus.WORK_PAUSE
+    currStatus === sessionStatus.WORKING ||
+    currStatus === sessionStatus.WORK_PAUSE
   ) {
     document.getElementById("status").innerText = `Working... (${periodNum})`;
   }
   if (
-    sessionStatus === sessionStatus.BREAK ||
-    sessionStatus === sessionStatus.CHILL_PAUSE
+    currStatus === sessionStatus.BREAK ||
+    currStatus === sessionStatus.CHILL_PAUSE
   ) {
     document.getElementById("status").innerText = `Chilling... (${periodNum})`;
   }
@@ -118,8 +118,10 @@ function takeBreak(secs, sessionStatus) {
   return { secs: secs, sessionStatus: sessionStatus };
 }
 
-/** a function called every second by setInterval()
- * switch states when current session ends
+/**
+ * This function is called every second by setInterval().
+ *
+ * Its handles switching states when the current session ends.
  */
 function showtime() {
   if (currSession === sessionStatus.WORKING) {
