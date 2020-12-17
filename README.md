@@ -20,11 +20,7 @@ npm install
 
 ### Package dependencies
 
-You need jQuery installed
-
-```
-npm install jquery
-```
+see ```package.json```
 
 
 ### Start development
