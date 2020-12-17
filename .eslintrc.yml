@@ -26,8 +26,9 @@ rules: {
     "import/no-useless-path-segments": "off",
     "no-shadow": "off",
     "no-alert": "off",
-    # TODO: reenable this one in the future. It's needed r/n so that
-    # stuff like "location" and "window" are usable
+    # TODO: reenable this one in the future, when the application uses a more
+    # modern JS architecture. It's needed r/n so that stuff like "location"
+    # and "window" are usable
     "no-restricted-globals": "off",
     # TODO: also reenable this, probably. We only use it so that we can
     # dynamically load a file in savesession.js, and in the future we should
@@ -41,4 +42,5 @@ rules: {
     "comma-dangle": "off",
     "operator-linebreak": "off",
     "implicit-arrow-linebreak": "off",
+    "object-curly-newline": "off",
   }
