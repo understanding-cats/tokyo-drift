@@ -6,32 +6,37 @@ const settings = require("../js/settings");
 const utils = require("../js/utils");
 const notification = require("../js/notification");
 
-/** Displays current session status on html page
- * @param {object} currStatus - Object for current session status
- * @param {number} periodNum - current period number
+/**
+ * Displays current session status on the HTML page.
+ *
+ * @param {Number} currStatus Current session status. This should match one of
+ *                            the values in the sessionStatus object, imported above.
+ * @param {Number} periodNum Current period number.
  */
 function showstatus(currStatus, periodNum) {
-  if (currStatus === sessionStatus.NOSESSION) {
-    document.getElementById("status").innerText = `Pomodoro${periodNum}`;
-  }
+  var statusText;
   if (
     currStatus === sessionStatus.WORKING ||
     currStatus === sessionStatus.WORK_PAUSE
   ) {
-    document.getElementById("status").innerText = `Working... (${periodNum})`;
-  }
-  if (
+    statusText = `Working... (${periodNum})`;
+  } else if (
     currStatus === sessionStatus.BREAK ||
     currStatus === sessionStatus.CHILL_PAUSE
   ) {
-    document.getElementById("status").innerText = `Chilling... (${periodNum})`;
+    statusText = `Chilling... (${periodNum})`;
+  } else {
+    // Corresponds to sessionStatus.NOSESSION, or some additional option added
+    // in the future that we don't know about
+    statusText = `Pomodoro ${periodNum}`;
   }
+  document.getElementById("status").innerText = statusText;
 }
 
 /**
  * Displays remaining time in MM:SS format.
  *
- * @param {number} secs Remaining seconds in current session.
+ * @param {Number} secs Remaining seconds in current session.
  */
 function updateClock(secs) {
   document.getElementById(
@@ -39,7 +44,8 @@ function updateClock(secs) {
   ).innerHTML = utils.secsToHumanReadableTime(secs);
 }
 
-/** reload current page.
+/**
+ * Reloads the current page.
  */
 function clearAll() {
   location.reload();
@@ -76,33 +82,34 @@ function finishSessions() {
   }
 }
 
-/** This function is called when session switches to "work session"
+/**
+ * This function is called when session switches to "work session"
  * when called, it pops a notification and changes html styles.
- * @param {number} workPeriod - Current work period
- * @param {number} sessionStatus - Current session status
- * @param {number} secs - remaining seconds
- * @return update workPeriod, sessionStatus, and secs
+ *
+ * @param {number} workPeriod Current work period
+ *
+ * @return update workPeriod, currStatus, and secs
  */
-function startWorkSession(workPeriod, sessionStatus, secs) {
-  workPeriod += 1;
+function startWorkSession(workPeriod) {
   // switch to work
   notification.showNotification(
     notification.notificationKind.START_WORK_SESSION
   ); // show desktop notification for one session starts
-  sessionStatus = 1;
   secs = totalWork - 1;
   document.body.style.backgroundColor = "#F1DCDC";
   document.getElementById("tomato_img").src = "../images/tomato_tran.png";
-  return { workPeriod: workPeriod, sessionStatus: sessionStatus, secs: secs };
+  return { workPeriod: workPeriod + 1, currStatus: sessionStatus.WORKING, secs: secs };
 }
 
-/** This function is called when session switches to "break session"
+/**
+ * This function is called when session switches to "break session"
  * when called, it pops a notification and changes html styles.
- * @param {number} secs - remaining seconds
- * @param {number} sessionStatus - Current session status
- * @return update workPeriod, sessionStatus, and secs
+ *
+ * @param {number} secs Remaining seconds
+ *
+ * @return update workPeriod, currStatus, and secs
  */
-function takeBreak(secs, sessionStatus) {
+function takeBreak(secs) {
   if (currWorkPeriod % 4 !== 0) {
     secs = totalBreak;
   } else {
@@ -112,10 +119,9 @@ function takeBreak(secs, sessionStatus) {
   notification.showNotification(
     notification.notificationKind.WORK_SESSION_DONE
   ); // show desktop notification for one session ends
-  sessionStatus = 2;
   document.body.style.backgroundColor = "#D0E9F3";
   document.getElementById("tomato_img").src = "../images/tomatoblue_tran.png";
-  return { secs: secs, sessionStatus: sessionStatus };
+  return { secs: secs, currStatus: sessionStatus.BREAK };
 }
 
 /**
@@ -129,8 +135,8 @@ function showtime() {
       totalSecs = decreaseTime(totalSecs);
     } else {
       // working and remaining secs <= 0
-      breakUpdates = takeBreak(totalSecs, currSession);
-      currSession = breakUpdates.sessionStatus;
+      breakUpdates = takeBreak(totalSecs);
+      currSession = breakUpdates.currStatus;
       totalSecs = breakUpdates.secs;
     }
   } else if (currSession === sessionStatus.BREAK) {
@@ -143,7 +149,7 @@ function showtime() {
       if (currWorkPeriod === totalPeriods) {
         finishSessions();
       } else {
-        startUpdates = startWorkSession();
+        startUpdates = startWorkSession(currWorkPeriod);
         currSession = startUpdates.sessionStatus;
         totalSecs = startUpdates.secs;
         currWorkPeriod = startUpdates.workPeriod;
