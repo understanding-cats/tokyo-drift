@@ -5,18 +5,22 @@
  */
 function start() {
   if (totalSecs >= 0) {
+    let shouldSetInterval = false;
     if (currSession === sessionStatus.NOSESSION) {
       currDate = new Date();
       workDate = currDate.toLocaleDateString();
       workTime = currDate.toLocaleTimeString();
       currWorkPeriod = 1;
       currSession = sessionStatus.WORKING;
-      intervalID = setInterval(showtime, 1000);
+      shouldSetInterval = true;
     } else if (currSession === sessionStatus.WORK_PAUSE) {
       currSession = sessionStatus.WORKING;
-      intervalID = setInterval(showtime, 1000);
+      shouldSetInterval = true;
     } else if (currSession === sessionStatus.CHILL_PAUSE) {
       currSession = sessionStatus.BREAK;
+      shouldSetInterval = true;
+    }
+    if (shouldSetInterval) {
       intervalID = setInterval(showtime, 1000);
     }
   }
