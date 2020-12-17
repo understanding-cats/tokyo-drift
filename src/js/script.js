@@ -95,7 +95,7 @@ function startWorkSession(workPeriod) {
   notification.showNotification(
     notification.notificationKind.START_WORK_SESSION
   ); // show desktop notification for one session starts
-  secs = totalWork - 1;
+  secs = totalWork;
   document.body.style.backgroundColor = "#F1DCDC";
   document.getElementById("tomato_img").src = "../images/tomato_tran.png";
   return {
