@@ -7,7 +7,6 @@
   left: 0;
   background-color: #ffdbdb;
   overflow-x: hidden;
-  transition: 0.5s;
 }
 
 .sidebar button {
@@ -17,7 +16,6 @@
   background-color: #bbbbbb;
   color: black;
   display: block;
-  transition: 0.3s;
 }
 
 .sidebar button:hover {
@@ -44,7 +42,6 @@
   position: fixed;
   top: 0;
   left: 0;
-  transition: margin-left 0.5s;
 }
 
 .modal {
