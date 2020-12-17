@@ -81,4 +81,24 @@ function secsToHumanReadableTime(secs) {
   }
 }
 
-module.exports = { padzero, secsToHumanReadableTime };
+function secsToMins(secs, withSuffix = false) {
+  let numSecs = parseFloat(secs);
+  if (!Number.isNaN(numSecs)) {
+    if (numSecs >= 0) {
+      var mins = numSecs / 60;
+      var formattedStr = mins.toFixed(2);
+      if (withSuffix) {
+        return `${formattedStr} mins`;
+      } else {
+        return formattedStr;
+      }
+    } else {
+      throw new Error("Input to secsToMins must be an number >= 0.");
+    }
+  } else {
+    console.log(numSecs);
+    throw new Error("Input to secsToMins must be a number.");
+  }
+}
+
+module.exports = { padzero, secsToHumanReadableTime, secsToMins };
