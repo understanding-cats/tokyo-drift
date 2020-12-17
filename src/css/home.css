@@ -23,12 +23,16 @@ h1 {
 #status {
   font-size: xx-large;
 }
-.banner {
+#bannerText {
   position: absolute;
-  top: 0%;
-  left: 0%;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 80px;
+  /* Needed to circumvent the user agent styling Electron (Chromium?) applies
+   * to <h1> elements by default. Without doing this, the banner text has a
+   * gap between its top and the top of the screen, which looks gross :( */
+  margin-block-start: 0 !important;
+  margin-inline-start: 0 !important;
   background-color: #ec524b;
 }
 #container {
