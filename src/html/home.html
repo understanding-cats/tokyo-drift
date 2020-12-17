@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="../css/menuStyle.css" />
+    <title>Pomodoro 2: Tokyo Drift</title>
+    <script>
+      window.$ = window.jQuery = require("jquery");
+    </script>
+  </head>
+  <body>
+    <h1 id="bannerText">Welcome to Pomodoro 2: Tokyo Drift!</h1>
+
+    <div id="SideMenu" class="sidebar"></div>
+
+    <div id="hamburger">
+      <button class="toggleMenuBtn" onclick="toggleMenu()">☰</button>
+    </div>
+
+    <div class="secs" id="mainsec">
+      <div id="container">
+        <img id="tomato_img" src="../images/tomato_tran.png" />
+
+        <button id="startSessionBtn" onclick="goToPomo();">
+          Start Session
+        </button>
+      </div>
+    </div>
+    <div class="secs" id="nameSec">
+      <input id="sessionName" type="text" value="Default Pomodoro Session" />
+    </div>
+
+    <div id="SetSessionModal" class="modal"></div>
+
+    <div id="HistoryModal" class="modal"></div>
+
+    <script src="../js/pages.js"></script>
+    <script src="../js/settings.js"></script>
+    <script src="../js/menu.js"></script>
+  </body>
+</html>

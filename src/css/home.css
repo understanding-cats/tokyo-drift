@@ -1,3 +1,10 @@
+/* This uses the same font families as in the Electron tutorial:
+ * https://github.com/electron/electron/blob/387a15f5829f623c9366d0a4625cc33f5a4758d4/default_app/styles.css#L4
+ */
+* {
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+    "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", sans-serif;
+}
 html {
   height: 100%;
 }
@@ -14,15 +21,18 @@ h1 {
 }
 
 #status {
-  font-family: "Courier New", Courier, monospace;
   font-size: xx-large;
 }
-.banner {
+#bannerText {
   position: absolute;
-  top: 0%;
-  left: 0%;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 80px;
+  /* Needed to circumvent the user agent styling Electron (Chromium?) applies
+   * to <h1> elements by default. Without doing this, the banner text has a
+   * gap between its top and the top of the screen, which looks gross :( */
+  margin-block-start: 0 !important;
+  margin-inline-start: 0 !important;
   background-color: #ec524b;
 }
 #container {

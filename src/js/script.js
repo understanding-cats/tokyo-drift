@@ -1,30 +1,36 @@
-const { remote } = require("electron");
+const { remote, session } = require("electron");
 
-const { Notification } = remote;
+const timer = require("../js/timer");
+const { sessionStatusObj, storeSessionToFile } = require("../js/session");
+const settings = require("../js/settings");
+const utils = require("../js/utils");
+const notification = require("../js/notification");
 
-//* ** utility functions ***
-
-function padzero(num) {
-  const s = `00${num}`;
-  return s.substr(s.length - 2);
-}
-function showstatus(sessionStatus, periodNum) {
-  if (sessionStatus === 0) {
-    document.getElementById("status").innerText = `Pomodoro${periodNum}`;
+/**
+ * Displays current session status on the HTML page.
+ *
+ * @param {Number} currStatus Current session status. This should match one of
+ *                            the values in the sessionStatus object, imported above.
+ * @param {Number} periodNum Current period number.
+ */
+function showstatus(currStatus, periodNum) {
+  let statusText;
+  if (
+    currStatus === sessionStatusObj.WORKING ||
+    currStatus === sessionStatusObj.WORK_PAUSE
+  ) {
+    statusText = `Working... (${periodNum})`;
+  } else if (
+    currStatus === sessionStatusObj.BREAK ||
+    currStatus === sessionStatusObj.CHILL_PAUSE
+  ) {
+    statusText = `Chilling... (${periodNum})`;
+  } else {
+    // Corresponds to sessionStatus.NOSESSION, or some additional option added
+    // in the future that we don't know about
+    statusText = `Pomodoro ${periodNum}`;
   }
-  if (sessionStatus === 1 || sessionStatus === 4) {
-    document.getElementById("status").innerText = `working...${periodNum}`;
-  }
-  if (sessionStatus === 2 || sessionStatus === 5) {
-    document.getElementById("status").innerText = `chilling...${periodNum}`;
-  }
-}
-function miniclock(secs) {
-  const min = Math.floor(secs / 60);
-  const sec = Math.floor(secs % 60);
-  document.getElementById("count_down").innerHTML = `${padzero(min)}:${padzero(
-    sec
-  )}`;
+  document.getElementById("status").innerText = statusText;
 }
 // Modified from https://stackoverflow.com/questions/36856232/write-add-data-in-json-file-using-node-js/36857101.
 function writeToFile(jsonpath,taskDate,taskName,taskStart,workLength,breakLength,allPeriods){
@@ -50,64 +56,175 @@ function writeToFile(jsonpath,taskDate,taskName,taskStart,workLength,breakLength
     }});
 }
 
-/// ***************************
+/**
+ * Displays remaining time in MM:SS format.
+ *
+ * @param {Number} secs Remaining seconds in current session.
+ */
+function updateClock(secs) {
+  document.getElementById(
+    "count_down"
+  ).innerHTML = utils.secsToHumanReadableTime(secs);
+}
 
-function getsessioninfo() {
-  // get and display latest setting on load
-  const workInSec = localStorage.getItem("work_ls") || 25 * 60;
-  const sbreakInSec = localStorage.getItem("sbreak_ls") || 5 * 60;
-  const lbreakInSec = localStorage.getItem("lbreak_ls") || 15 * 60;
-  const workPeriods = localStorage.getItem("periods_ls") || 4;
-  document.getElementById("worktime").innerText = `Work Session: ${
-    workInSec / 60
-  } mins`;
-  document.getElementById("shortbreak").innerText = `Short Break: ${
-    sbreakInSec / 60
-  } mins`;
-  document.getElementById("longbreak").innerText = `Long Break: ${
-    lbreakInSec / 60
-  } mins`;
-  document.getElementById("workp").innerText = `Work Periods: ${workPeriods}`;
-  document.getElementById("pomo_length").value = workInSec / 60;
-  document.getElementById("sbreak_length").value = sbreakInSec / 60;
-  document.getElementById("lbreak_length").value = lbreakInSec / 60;
-  document.getElementById("work_periods").value = workPeriods;
+/**
+ * Reloads the current page.
+ */
+function clearAll() {
+  location.reload();
+}
+
+/** utility function that decreases number by one
+ * @param {number} secs
+ */
+function decreaseTime(secs) {
+  return secs - 1;
+}
+
+/** pops notification when a task finishes.
+ * Also pops a dialogue box to ask if user wants to go back to main menu.
+ */
+function finishSessions() {
+  clearInterval(intervalID);
+  storeSessionToFile(
+    "seshistory.json",
+    workDate,
+    taskName,
+    workTime,
+    workInSec,
+    sbreakInSec,
+    workPeriods
+  );
+  notification.showNotification(
+    notification.notificationKind.SESSIONS_COMPLETE
+  ); // show desktop notification for all sessions end
+  const r = confirm("Sessions complete! Go back to menu?");
+  if (r) {
+    location.href = "home.html";
+  } else {
+    clearAll();
+  }
+}
+
+/**
+ * This function is called when session switches to "work session"
+ * when called, it pops a notification and changes html styles.
+ *
+ * @param {number} workPeriod Current work period
+ *
+ * @return update workPeriod, currStatus, and secs
+ */
+function startWorkSession(workPeriod) {
+  // switch to work
+  notification.showNotification(
+    notification.notificationKind.START_WORK_SESSION
+  ); // show desktop notification for one session starts
+  secs = totalWork;
+  document.body.style.backgroundColor = "#F1DCDC";
+  document.getElementById("tomato_img").src = "../images/tomato_tran.png";
+  return {
+    workPeriod: workPeriod + 1,
+    currStatus: sessionStatusObj.WORKING,
+    secs,
+  };
+}
+
+/**
+ * This function is called when session switches to "break session"
+ * when called, it pops a notification and changes html styles.
+ *
+ * @param {number} secs Remaining seconds
+ *
+ * @return update workPeriod, currStatus, and secs
+ */
+function takeBreak(secs) {
+  if (currWorkPeriod % 4 !== 0) {
+    secs = totalBreak;
+  } else {
+    secs = totalLongBreak;
+  }
+  // switch to break mode
+  notification.showNotification(
+    notification.notificationKind.WORK_SESSION_DONE
+  ); // show desktop notification for one session ends
+  document.body.style.backgroundColor = "#D0E9F3";
+  document.getElementById("tomato_img").src = "../images/tomatoblue_tran.png";
+  return { secs, currStatus: sessionStatusObj.BREAK };
+}
+
+/**
+ * This function is called every second by setInterval().
+ *
+ * Its handles switching states when the current session ends.
+ */
+function showtime() {
+  if (currSession === sessionStatusObj.WORKING) {
+    if (totalSecs >= 0) {
+      totalSecs = decreaseTime(totalSecs);
+    } else {
+      // working and remaining secs <= 0
+      breakUpdates = takeBreak(totalSecs);
+      currSession = breakUpdates.currStatus;
+      totalSecs = breakUpdates.secs;
+    }
+  } else if (currSession === sessionStatusObj.BREAK) {
+    if (totalSecs >= 0) {
+      // if breaking and have remaining secs
+      totalSecs = decreaseTime(totalSecs);
+    } else {
+      // if breaking and no remaining secs
+      // updateClock(totalSecs);
+      if (currWorkPeriod === totalPeriods) {
+        finishSessions();
+      } else {
+        startUpdates = startWorkSession(currWorkPeriod);
+        currSession = startUpdates.currStatus;
+        totalSecs = startUpdates.secs;
+        currWorkPeriod = startUpdates.workPeriod;
+      }
+    }
+  }
+  showstatus(currSession, currWorkPeriod);
+  updateClock(totalSecs);
+}
+
+/** Ask user to confirm action when click cancel
+ * bind to an onclick actionl.
+ */
+function cancelAll() {
+  timer.stop();
+  const r = confirm("Are you sure you want to cancel the current session?");
+  if (r) {
+    location.href = "home.html";
+  }
 }
 
 // On page load, get all session info
-const taskName = localStorage.getItem("session_name") || "Default Pomodoro Session";
-const workInSec = localStorage.getItem("work_ls") || 25 * 60;
-const sbreakInSec = localStorage.getItem("sbreak_ls") || 5 * 60;
-const lbreakInSec = localStorage.getItem("lbreak_ls") || 15 * 60;
-const workPeriods = localStorage.getItem("periods_ls") || 4;
-let currDate = new Date();
-let workDate = currDate.toLocaleDateString();
-let workTime = currDate.toLocaleTimeString();
+const taskName =
+  localStorage.getItem("session_name") || "Default Pomodoro Session";
+const {
+  workInSec,
+  sbreakInSec,
+  lbreakInSec,
+  workPeriods,
+} = settings.getSettings();
+const currDateOnPageLoad = new Date();
+let workDate = currDateOnPageLoad.toLocaleDateString();
+let workTime = currDateOnPageLoad.toLocaleTimeString();
 
-document.getElementById("currworktime").innerText = `Work Session: ${
-  workInSec / 60
-} mins`;
-document.getElementById("currshortbreak").innerText = `Short Break: ${
-  sbreakInSec / 60
-} mins`;
-document.getElementById("currlongbreak").innerText = `Long Break: ${
-  lbreakInSec / 60
-} mins`;
-document.getElementById("currworkp").innerText = `Work Periods: ${workPeriods}`;
-
-miniclock(workInSec);
+updateClock(workInSec);
 
 // TODO: totalWork = work_incec etc.
-let totalWork = parseInt(workInSec);
-let totalBreak = parseInt(sbreakInSec);
-let totalLongBreak = parseInt(lbreakInSec);
-let totalPeriods = parseInt(workPeriods);
+let totalWork = parseInt(workInSec, 10);
+let totalBreak = parseInt(sbreakInSec, 10);
+let totalLongBreak = parseInt(lbreakInSec, 10);
+let totalPeriods = parseInt(workPeriods, 10);
 
 // 5 secs for quick end2end testing
-//  totalWork = 5;
-//  totalBreak = 5;
-//  totalLongBreak = 10;
- //totalPeriods = 1;
+// totalWork = 5;
+// totalBreak = 1;
+// totalLongBreak = 10;
+// totalPeriods = 1;
 
 let intervalID;
 let currSession = 0;
@@ -120,125 +237,3 @@ let currSession = 0;
 let currWorkPeriod = 0;
 let totalSecs = totalWork;
 // totalSecs is whatever displays on the clock
-
-// Show desktop notifications: see https://www.electronjs.org/docs/tutorial/notifications.
-function showNotification(notifKind) {
-  let msgText;
-  if (notifKind === 0) {
-    msgText = "Congratulations! All sessions complete.";
-  } else if (notifKind === 1) {
-    msgText = "Completed one working session.";
-  } else if (notifKind === 2) {
-    msgText = "Starting one working session.";
-  } else {
-    throw new Error("Unrecognzied notification type.");
-  }
-  new Notification({
-    title: "Pomodoro 2: Tokyo Drift",
-    body: msgText,
-  }).show();
-}
-
-function clearAll() {
-  location.reload();
-}
-
-// clock
-function showtime() {
-  if (currSession === 1 && totalSecs >= 0) {
-    // working and remaining secs >0
-    totalSecs--;
-    if (totalSecs >= 0) {
-      miniclock(totalSecs);
-    }
-    showstatus(currSession, currWorkPeriod);
-  }
-  if (currSession === 1 && totalSecs < 0) {
-    // working and remaining secs <= 0
-    if (currWorkPeriod % 4 !== 0) {
-      totalSecs = totalBreak;
-    } else {
-      totalSecs = totalLongBreak;
-    }
-    // switch to break mode
-    showNotification(1); // show desktop notification for one session ends
-    currSession = 2;
-    document.body.style.backgroundColor = "#D0E9F3";
-    document.getElementById("tomato_img").src = "../images/tomatoblue_tran.png";
-    // miniclock(totalSecs);
-    showstatus(currSession, currWorkPeriod);
-  }
-  if (currSession === 2 && totalSecs >= 0) {
-    // if breaking and have remaining secs
-    totalSecs -= 1;
-    if (totalSecs >= 0) {
-      miniclock(totalSecs);
-    }
-    showstatus(currSession, currWorkPeriod);
-  }
-  if (currSession === 2 && totalSecs < 0) {
-    // if breaking and no remaining secs
-    // miniclock(totalSecs);
-    if (currWorkPeriod === totalPeriods) {
-      clearInterval(intervalID);
-      writeToFile("seshistory.json",workDate,taskName,workTime,workInSec,sbreakInSec,workPeriods);
-      showNotification(0); // show desktop notification for all sessions end
-      const r = confirm("Sessions complete! Go back to menu?");
-      if (r) {
-        location.href = "../home.html";
-      } else {
-        clearAll();
-      }
-    } else {
-      currWorkPeriod += 1;
-      // switch to work
-      showNotification(2); // show desktop notification for one session starts
-      currSession = 1;
-      totalSecs = totalWork - 1;
-      document.body.style.backgroundColor = "#F1DCDC";
-      document.getElementById("tomato_img").src = "../images/tomato_tran.png";
-      miniclock(totalSecs);
-      showstatus(currSession, currWorkPeriod);
-    }
-  }
-}
-function start() {
-  if ((currSession === 0 || currSession === 4) && totalSecs >= 0) {
-    if (currSession === 0) {
-      currDate = new Date();
-      workDate = currDate.toLocaleDateString();
-      workTime = currDate.toLocaleTimeString();
-      currWorkPeriod = 1;
-    }
-    currSession = 1;
-    // document.body.style.backgroundColor = "#F1DCDC";
-    // document.getElementById("tomato_img").src = "tomato_tran.png";
-    intervalID = setInterval(showtime, 1000);
-  }
-  if (currSession === 5 && totalSecs >= 0) {
-    currSession = 2;
-    intervalID = setInterval(showtime, 1000);
-  }
-}
-function stop() {
-  if (currSession === 0) {
-    return;
-  }
-  if (currSession === 1) {
-    currSession = 4;
-  }
-  if (currSession === 2) {
-    currSession = 5;
-  }
-
-  clearInterval(intervalID);
-  document.getElementById("status").innerHTML = "Pause";
-}
-
-function cancelAll() {
-  stop();
-  const r = confirm("Are you sure you want to cancel the current session?");
-  if (r) {
-    clearAll();
-  }
-}

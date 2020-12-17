@@ -1,0 +1,52 @@
+<button onclick="openModal('SetSessionModal')">Session Settings</button>
+<button onclick="openModal('HistoryModal')">Session History</button>
+<button onclick="back2menu()">Back to Home</button>
+
+<!-- As you can probably tell, the <table>s here are essentially identical,
+    except for the fact that they have different headers and <td> IDs. It may
+    be worth trying to automate the generation of these tables' HTML, to make
+    updating the display of these elements easier.
+-->
+<table class="sessionInfoTable">
+  <tr>
+    <th colspan="2" class="tableTopHeader">Current Session Info</th>
+  </tr>
+  <tr>
+    <th>Work Session Length</th>
+    <td id="currworktime"></td>
+  </tr>
+  <tr>
+    <th>Short Break Length</th>
+    <td id="currshortbreak"></td>
+  </tr>
+  <tr>
+    <th>Long Break Length</th>
+    <td id="currlongbreak"></td>
+  </tr>
+  <tr>
+    <th>Number of Work Periods</th>
+    <td id="currworkp"></td>
+  </tr>
+</table>
+
+<table class="sessionInfoTable">
+  <tr>
+    <th colspan="2" class="tableTopHeader">Next Session Info</th>
+  </tr>
+  <tr>
+    <th>Work Session Length</th>
+    <td id="worktime"></td>
+  </tr>
+  <tr>
+    <th>Short Break Length</th>
+    <td id="shortbreak"></td>
+  </tr>
+  <tr>
+    <th>Long Break Length</th>
+    <td id="longbreak"></td>
+  </tr>
+  <tr>
+    <th>Number of Work Periods</th>
+    <td id="workp"></td>
+  </tr>
+</table>

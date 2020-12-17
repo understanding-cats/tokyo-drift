@@ -4,9 +4,18 @@
 <img width="300px" src="https://raw.githubusercontent.com/understanding-cats/tokyo-drift/main/src/images/tomato_tran.png" />
 </div>
 
-## User Documentation
+Have you ever wanted to use a Pomodoro timer, but thought "Sheesh, I don't want
+to have to buy a physical timer?"
 
-**Coming soon!**
+Did you look at all 2.7 million search results for `pomodoro timer` on Google
+and think "All of these seem too popular. I want to use something that was
+developed in ten weeks for a graduate class?"
+
+Do you just, like, _really_ like tomatoes?
+
+Then we have the application for you! Introducing **Pomodoro 2: Tokyo Drift**,
+coming at you hot, ready, and decently well-tested from the sandy beaches of
+UC San Diego.
 
 ## Developer Documentation
 
@@ -17,6 +26,10 @@ You need Node.js installed on your machine.
 ```
 npm install
 ```
+
+### Package dependencies
+
+See the repository's `package.json` file.
 
 ### Start development
 

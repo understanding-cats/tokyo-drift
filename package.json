@@ -56,7 +56,7 @@
               "config": "./webpack.renderer.config.js",
               "entryPoints": [
                 {
-                  "html": "./src/index.html",
+                  "html": "./src/html/home.html",
                   "js": "./src/renderer/renderer.js",
                   "name": "main_window"
                 }
@@ -91,6 +91,7 @@
     "xvfb-maybe": "^0.2.1"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "jquery": "^3.5.1"
   }
 }

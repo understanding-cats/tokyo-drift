@@ -4,3 +4,4 @@ node_modules
 .webpack
 docs
 out
+.DS_STORE
