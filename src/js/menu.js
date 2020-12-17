@@ -49,7 +49,7 @@ function loadMenu() {
             "session_modal.html",
             function loadInfo(response, status, xhr) {
               settings.displayCurrentSettings();
-              loadSessionHistory("../json/seshistory.json");
+              loadSessionHistory("../../json/seshistory.json");
             }
           );
         }

@@ -1,3 +1,6 @@
+/** Start timer when current session is none or pause.
+ * bind to an onclick action.
+ */
 function start() {
   if ((currSession === 0 || currSession === 4) && totalSecs >= 0) {
     if (currSession === 0) {
@@ -17,6 +20,9 @@ function start() {
   }
 }
 
+/** Pause timer when current session is break or work.
+ * bind to an onclick action.
+ */
 function stop() {
   if (currSession === 0) {
     return;

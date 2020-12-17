@@ -7,11 +7,18 @@ const notification = require("../js/notification");
 
 //* ** utility functions ***
 
+/** utility function that pads number with zeros at the front to make it 2 digits.
+ * @param {number} num
+ */
 function padzero(num) {
   const s = `00${num}`;
   return s.substr(s.length - 2);
 }
 
+/** Displays current session status on html page
+ * @param {object} sessionStatus - Object for current session status
+ * @param {number} periodNum - current period number
+ */
 function showstatus(sessionStatus, periodNum) {
   if (sessionStatus === sessionStatus.NOSESSION) {
     document.getElementById("status").innerText = `Pomodoro${periodNum}`;
@@ -30,6 +37,9 @@ function showstatus(sessionStatus, periodNum) {
   }
 }
 
+/** Displays remaining time in minutes:seconds
+ * @param {number} secs - Remaining secs in current session
+ */
 function miniclock(secs) {
   if (secs < 0) {
     secs = 0;
@@ -40,14 +50,22 @@ function miniclock(secs) {
     sec
   )}`;
 }
+
+/** reload current page.
+ */
 function clearAll() {
   location.reload();
 }
 
+/** utility function that decreases number by one
+ * @param {number} secs
+ */
 function decreaseTime(secs) {
   return secs - 1;
 }
 
+/** pops notification when a task finishes. Also pops a dialogue box to ask if user wants to go back to main menu.
+ */
 function finishSessions() {
   clearInterval(intervalID);
   storeSessionToFile(
@@ -70,6 +88,13 @@ function finishSessions() {
   }
 }
 
+/** This function is called when session switches to "work session"
+ * when called, it pops a notification and changes html styles.
+ * @param {number} workPeriod - Current work period
+ * @param {number} sessionStatus - Current session status
+ * @param {number} secs - remaining seconds
+ * @return update workPeriod, sessionStatus, and secs
+ */
 function startWorkSession(workPeriod, sessionStatus, secs) {
   workPeriod += 1;
   // switch to work
@@ -83,6 +108,12 @@ function startWorkSession(workPeriod, sessionStatus, secs) {
   return { workPeriod: workPeriod, sessionStatus: sessionStatus, secs: secs };
 }
 
+/** This function is called when session switches to "break session"
+ * when called, it pops a notification and changes html styles.
+ * @param {number} secs - remaining seconds
+ * @param {number} sessionStatus - Current session status
+ * @return update workPeriod, sessionStatus, and secs
+ */
 function takeBreak(secs, sessionStatus) {
   if (currWorkPeriod % 4 !== 0) {
     secs = totalBreak;
@@ -99,7 +130,9 @@ function takeBreak(secs, sessionStatus) {
   return { secs: secs, sessionStatus: sessionStatus };
 }
 
-// clock
+/** a function called every second by setInterval()
+ * switch states when current session ends
+ */
 function showtime() {
   if (currSession === sessionStatus.WORKING) {
     if (totalSecs >= 0) {
@@ -131,6 +164,9 @@ function showtime() {
   miniclock(totalSecs);
 }
 
+/** Ask user to confirm action when click cancel
+ * bind to an onclick actionl.
+ */
 function cancelAll() {
   timer.stop();
   const r = confirm("Are you sure you want to cancel the current session?");
