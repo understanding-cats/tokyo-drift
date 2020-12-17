@@ -7,7 +7,7 @@ function start() {
   if (totalSecs >= 0) {
     let shouldSetInterval = false;
     if (currSession === sessionStatusObj.NOSESSION) {
-      currDate = new Date();
+      let currDate = new Date();
       workDate = currDate.toLocaleDateString();
       workTime = currDate.toLocaleTimeString();
       currWorkPeriod = 1;

@@ -172,7 +172,7 @@ function cancelAll() {
   timer.stop();
   const r = confirm("Are you sure you want to cancel the current session?");
   if (r) {
-    clearAll();
+    location.href = "home.html";
   }
 }
 
@@ -185,9 +185,9 @@ const {
   lbreakInSec,
   workPeriods,
 } = settings.getSettings();
-const currDate = new Date();
-let workDate = currDate.toLocaleDateString();
-let workTime = currDate.toLocaleTimeString();
+const currDateOnPageLoad = new Date();
+let workDate = currDateOnPageLoad.toLocaleDateString();
+let workTime = currDateOnPageLoad.toLocaleTimeString();
 
 updateClock(workInSec);
 
