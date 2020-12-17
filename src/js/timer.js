@@ -1,37 +1,41 @@
-/** Start timer when current session is none or pause.
- * bind to an onclick action.
+/**
+ * Start timer when current session is none or pause, and also un-pause breaks.
+ *
+ * This is bound to an onclick action.
  */
 function start() {
-  if ((currSession === 0 || currSession === 4) && totalSecs >= 0) {
-    if (currSession === 0) {
+  if (totalSecs >= 0) {
+    if (currSession === sessionStatus.NOSESSION) {
       currDate = new Date();
       workDate = currDate.toLocaleDateString();
       workTime = currDate.toLocaleTimeString();
       currWorkPeriod = 1;
+      currSession = sessionStatus.WORKING;
+      intervalID = setInterval(showtime, 1000);
+    } else if (currSession === sessionStatus.WORK_PAUSE) {
+      currSession = sessionStatus.WORKING;
+      intervalID = setInterval(showtime, 1000);
+    } else if (currSession === sessionStatus.CHILL_PAUSE) {
+      currSession = sessionStatus.BREAK;
+      intervalID = setInterval(showtime, 1000);
     }
-    currSession = 1;
-    // document.body.style.backgroundColor = "#F1DCDC";
-    // document.getElementById("tomato_img").src = "tomato_tran.png";
-    intervalID = setInterval(showtime, 1000);
-  }
-  if (currSession === 5 && totalSecs >= 0) {
-    currSession = 2;
-    intervalID = setInterval(showtime, 1000);
   }
 }
 
-/** Pause timer when current session is break or work.
- * bind to an onclick action.
+/**
+ * Pause timer when current session is break or work.
+ *
+ * This is bound to an onclick action.
  */
 function stop() {
-  if (currSession === 0) {
+  if (currSession === sessionStatus.NOSESSION) {
     return;
   }
-  if (currSession === 1) {
-    currSession = 4;
+  if (currSession === sessionStatus.WORKING) {
+    currSession = sessionStatus.WORK_PAUSE;
   }
-  if (currSession === 2) {
-    currSession = 5;
+  if (currSession === sessionStatus.BREAK) {
+    currSession = sessionStatus.CHILL_PAUSE;
   }
 
   clearInterval(intervalID);

@@ -18,13 +18,13 @@ function showstatus(sessionStatus, periodNum) {
     sessionStatus === sessionStatus.WORKING ||
     sessionStatus === sessionStatus.WORK_PAUSE
   ) {
-    document.getElementById("status").innerText = `working...${periodNum}`;
+    document.getElementById("status").innerText = `Working... (${periodNum})`;
   }
   if (
     sessionStatus === sessionStatus.BREAK ||
     sessionStatus === sessionStatus.CHILL_PAUSE
   ) {
-    document.getElementById("status").innerText = `chilling...${periodNum}`;
+    document.getElementById("status").innerText = `Chilling... (${periodNum})`;
   }
 }
 
