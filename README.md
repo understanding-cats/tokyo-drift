@@ -18,6 +18,15 @@ You need Node.js installed on your machine.
 npm install
 ```
 
+### Package dependencies
+
+You need jQuery installed
+
+```
+npm install jquery
+```
+
+
 ### Start development
 
 You can start the app with:
