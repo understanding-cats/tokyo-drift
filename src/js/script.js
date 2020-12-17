@@ -14,7 +14,7 @@ const notification = require("../js/notification");
  * @param {Number} periodNum Current period number.
  */
 function showstatus(currStatus, periodNum) {
-  var statusText;
+  let statusText;
   if (
     currStatus === sessionStatusObj.WORKING ||
     currStatus === sessionStatusObj.WORK_PAUSE
@@ -58,7 +58,8 @@ function decreaseTime(secs) {
   return secs - 1;
 }
 
-/** pops notification when a task finishes. Also pops a dialogue box to ask if user wants to go back to main menu.
+/** pops notification when a task finishes.
+ * Also pops a dialogue box to ask if user wants to go back to main menu.
  */
 function finishSessions() {
   clearInterval(intervalID);
@@ -101,7 +102,7 @@ function startWorkSession(workPeriod) {
   return {
     workPeriod: workPeriod + 1,
     currStatus: sessionStatusObj.WORKING,
-    secs: secs,
+    secs,
   };
 }
 
@@ -125,7 +126,7 @@ function takeBreak(secs) {
   ); // show desktop notification for one session ends
   document.body.style.backgroundColor = "#D0E9F3";
   document.getElementById("tomato_img").src = "../images/tomatoblue_tran.png";
-  return { secs: secs, currStatus: sessionStatusObj.BREAK };
+  return { secs, currStatus: sessionStatusObj.BREAK };
 }
 
 /**
@@ -184,23 +185,23 @@ const {
   lbreakInSec,
   workPeriods,
 } = settings.getSettings();
-let currDate = new Date();
+const currDate = new Date();
 let workDate = currDate.toLocaleDateString();
 let workTime = currDate.toLocaleTimeString();
 
 updateClock(workInSec);
 
 // TODO: totalWork = work_incec etc.
-let totalWork = parseInt(workInSec);
-let totalBreak = parseInt(sbreakInSec);
-let totalLongBreak = parseInt(lbreakInSec);
-let totalPeriods = parseInt(workPeriods);
+let totalWork = parseInt(workInSec, 10);
+let totalBreak = parseInt(sbreakInSec, 10);
+let totalLongBreak = parseInt(lbreakInSec, 10);
+let totalPeriods = parseInt(workPeriods, 10);
 
 // 5 secs for quick end2end testing
-//totalWork = 5;
-//totalBreak = 1;
-//totalLongBreak = 10;
-//totalPeriods = 1;
+// totalWork = 5;
+// totalBreak = 1;
+// totalLongBreak = 10;
+// totalPeriods = 1;
 
 let intervalID;
 let currSession = 0;

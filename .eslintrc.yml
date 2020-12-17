@@ -16,6 +16,16 @@ rules: {
     "no-useless-constructor": "off",
     "class-methods-use-this": "off",
     "no-plusplus": "off",
+    "no-undef": "off",
+    "no-param-reassign": "off",
+    "no-else-return": "off",
+    "prefer-arrow-callback": "off",
+    "no-restricted-syntax": "off",
+    "no-use-before-define": "off",
+    "no-lonely-if": "off",
+    "import/no-useless-path-segments": "off",
+    "no-shadow": "off",
+    "no-alert": "off",
     # TODO: reenable this one in the future. It's needed r/n so that
     # stuff like "location" and "window" are usable
     "no-restricted-globals": "off",
