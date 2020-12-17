@@ -1,4 +1,4 @@
-const sessionStatus = {
+const sessionStatusObj = {
   NOSESSION: 0,
   WORKING: 1,
   BREAK: 2,
@@ -88,4 +88,4 @@ function displaySessionRecord(startDate, record) {
   document.getElementById("HistoryModalContent").appendChild(clnctn);
 }
 
-module.exports = { sessionStatus, loadSessionHistory, storeSessionToFile };
+module.exports = { sessionStatusObj, loadSessionHistory, storeSessionToFile };

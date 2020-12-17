@@ -1,7 +1,7 @@
 const { remote, session } = require("electron");
 
 const timer = require("../js/timer");
-const { sessionStatus, storeSessionToFile } = require("../js/session");
+const { sessionStatusObj, storeSessionToFile } = require("../js/session");
 const settings = require("../js/settings");
 const utils = require("../js/utils");
 const notification = require("../js/notification");
@@ -16,13 +16,13 @@ const notification = require("../js/notification");
 function showstatus(currStatus, periodNum) {
   var statusText;
   if (
-    currStatus === sessionStatus.WORKING ||
-    currStatus === sessionStatus.WORK_PAUSE
+    currStatus === sessionStatusObj.WORKING ||
+    currStatus === sessionStatusObj.WORK_PAUSE
   ) {
     statusText = `Working... (${periodNum})`;
   } else if (
-    currStatus === sessionStatus.BREAK ||
-    currStatus === sessionStatus.CHILL_PAUSE
+    currStatus === sessionStatusObj.BREAK ||
+    currStatus === sessionStatusObj.CHILL_PAUSE
   ) {
     statusText = `Chilling... (${periodNum})`;
   } else {
@@ -100,7 +100,7 @@ function startWorkSession(workPeriod) {
   document.getElementById("tomato_img").src = "../images/tomato_tran.png";
   return {
     workPeriod: workPeriod + 1,
-    currStatus: sessionStatus.WORKING,
+    currStatus: sessionStatusObj.WORKING,
     secs: secs,
   };
 }
@@ -125,7 +125,7 @@ function takeBreak(secs) {
   ); // show desktop notification for one session ends
   document.body.style.backgroundColor = "#D0E9F3";
   document.getElementById("tomato_img").src = "../images/tomatoblue_tran.png";
-  return { secs: secs, currStatus: sessionStatus.BREAK };
+  return { secs: secs, currStatus: sessionStatusObj.BREAK };
 }
 
 /**
@@ -134,7 +134,7 @@ function takeBreak(secs) {
  * Its handles switching states when the current session ends.
  */
 function showtime() {
-  if (currSession === sessionStatus.WORKING) {
+  if (currSession === sessionStatusObj.WORKING) {
     if (totalSecs >= 0) {
       totalSecs = decreaseTime(totalSecs);
     } else {
@@ -143,7 +143,7 @@ function showtime() {
       currSession = breakUpdates.currStatus;
       totalSecs = breakUpdates.secs;
     }
-  } else if (currSession === sessionStatus.BREAK) {
+  } else if (currSession === sessionStatusObj.BREAK) {
     if (totalSecs >= 0) {
       // if breaking and have remaining secs
       totalSecs = decreaseTime(totalSecs);
@@ -154,7 +154,7 @@ function showtime() {
         finishSessions();
       } else {
         startUpdates = startWorkSession(currWorkPeriod);
-        currSession = startUpdates.sessionStatus;
+        currSession = startUpdates.currStatus;
         totalSecs = startUpdates.secs;
         currWorkPeriod = startUpdates.workPeriod;
       }
@@ -197,8 +197,8 @@ let totalLongBreak = parseInt(lbreakInSec);
 let totalPeriods = parseInt(workPeriods);
 
 // 5 secs for quick end2end testing
-//  totalWork = 5;
-//  totalBreak = 5;
+totalWork = 5;
+totalBreak = 5;
 //  totalLongBreak = 10;
 //totalPeriods = 1;
 

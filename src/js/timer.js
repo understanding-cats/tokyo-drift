@@ -6,18 +6,18 @@
 function start() {
   if (totalSecs >= 0) {
     let shouldSetInterval = false;
-    if (currSession === sessionStatus.NOSESSION) {
+    if (currSession === sessionStatusObj.NOSESSION) {
       currDate = new Date();
       workDate = currDate.toLocaleDateString();
       workTime = currDate.toLocaleTimeString();
       currWorkPeriod = 1;
-      currSession = sessionStatus.WORKING;
+      currSession = sessionStatusObj.WORKING;
       shouldSetInterval = true;
-    } else if (currSession === sessionStatus.WORK_PAUSE) {
-      currSession = sessionStatus.WORKING;
+    } else if (currSession === sessionStatusObj.WORK_PAUSE) {
+      currSession = sessionStatusObj.WORKING;
       shouldSetInterval = true;
-    } else if (currSession === sessionStatus.CHILL_PAUSE) {
-      currSession = sessionStatus.BREAK;
+    } else if (currSession === sessionStatusObj.CHILL_PAUSE) {
+      currSession = sessionStatusObj.BREAK;
       shouldSetInterval = true;
     }
     if (shouldSetInterval) {
@@ -32,14 +32,14 @@ function start() {
  * This is bound to an onclick action.
  */
 function stop() {
-  if (currSession === sessionStatus.NOSESSION) {
+  if (currSession === sessionStatusObj.NOSESSION) {
     return;
   }
-  if (currSession === sessionStatus.WORKING) {
-    currSession = sessionStatus.WORK_PAUSE;
+  if (currSession === sessionStatusObj.WORKING) {
+    currSession = sessionStatusObj.WORK_PAUSE;
   }
-  if (currSession === sessionStatus.BREAK) {
-    currSession = sessionStatus.CHILL_PAUSE;
+  if (currSession === sessionStatusObj.BREAK) {
+    currSession = sessionStatusObj.CHILL_PAUSE;
   }
 
   clearInterval(intervalID);
