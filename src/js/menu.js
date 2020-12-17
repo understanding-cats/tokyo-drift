@@ -4,8 +4,8 @@ if (typeof settings === "undefined") {
 const { loadSessionHistory } = require("../js/session");
 
 function expand(btn) {
-  var content = btn.nextElementSibling;
-  if (content.style.display == "block") {
+  const content = btn.nextElementSibling;
+  if (content.style.display === "block") {
     content.style.display = "none";
   } else {
     content.style.display = "block";
@@ -13,12 +13,12 @@ function expand(btn) {
 }
 
 function toggleMenu() {
-  if (menu_open == 0) {
+  if (menuOpen === 0) {
     openNav();
-    menu_open = 1;
+    menuOpen = 1;
   } else {
     closeNav();
-    menu_open = 0;
+    menuOpen = 0;
   }
 }
 
@@ -31,9 +31,11 @@ function closeNav() {
   document.getElementById("SideMenu").style.width = "0";
   document.getElementById("hamburger").style.marginLeft = "0";
 }
+
 function closeModal(modalID) {
   document.getElementById(modalID).style.display = "none";
 }
+
 function openModal(modalID) {
   document.getElementById(modalID).style.display = "block";
 }
@@ -58,5 +60,5 @@ function loadMenu() {
   );
 }
 
-var menu_open = 0;
+let menuOpen = 0;
 loadMenu();

@@ -9,7 +9,7 @@ const sessionStatusObj = {
 function loadSessionHistory(path) {
   const jsonData = require(path);
 
-  for (var record of jsonData.records) {
+  for (const record of jsonData.records) {
     const startDate = new Date(record.date);
     displaySessionRecord(startDate.toDateString(), record);
   }
@@ -36,13 +36,13 @@ function storeSessionToFile(
 ) {
   const fs = window.require("fs");
   const path = window.require("path");
-  var jPath = path.join(__dirname, "..", "..", "json", jsonpath);
+  const jPath = path.join(__dirname, "..", "..", "json", jsonpath);
   fs.readFile(jPath, "utf8", function readFileCallback(err, data) {
     if (err) {
       throw err;
     } else {
       obj = JSON.parse(data);
-      n_record = {
+      nRecord = {
         date: taskDate,
         task: taskName,
         start: taskStart,

@@ -105,11 +105,11 @@ function secsToHumanReadableTime(secs) {
  *                 determines it to be a negative Number.
  */
 function secsToMins(secs, withSuffix = false) {
-  let numSecs = parseFloat(secs);
+  const numSecs = parseFloat(secs);
   if (!Number.isNaN(numSecs)) {
     if (numSecs >= 0) {
-      var mins = numSecs / 60;
-      var formattedStr = mins.toLocaleString("en-US");
+      const mins = numSecs / 60;
+      const formattedStr = mins.toLocaleString("en-US");
       if (withSuffix) {
         return `${formattedStr} mins`;
       } else {

@@ -17,10 +17,10 @@ function setSettings() {
   displaySessionSettings(workInSec, sbreakInSec, lbreakInSec, workPeriods);
 
   return {
-    workInSec: workInSec,
-    sbreakInSec: sbreakInSec,
-    lbreakInSec: lbreakInSec,
-    workPeriods: workPeriods,
+    workInSec,
+    sbreakInSec,
+    lbreakInSec,
+    workPeriods,
   };
 }
 
@@ -49,10 +49,10 @@ function getSettings() {
     displaySettings(workInSec, sbreakInSec, lbreakInSec, workPeriods);
   }
   return {
-    workInSec: parseInt(workInSec),
-    sbreakInSec: parseInt(sbreakInSec),
-    lbreakInSec: parseInt(lbreakInSec),
-    workPeriods: parseInt(workPeriods),
+    workInSec: parseInt(workInSec, 10),
+    sbreakInSec: parseInt(sbreakInSec, 10),
+    lbreakInSec: parseInt(lbreakInSec, 10),
+    workPeriods: parseInt(workPeriods, 10),
   };
 }
 /** This function display current settings as place holders in input box.
@@ -102,7 +102,9 @@ function displaySessionSettings(
  * i.e next session info.
  */
 function displayCurrentSettings() {
-  const { workInSec, sbreakInSec, lbreakInSec, workPeriods } = getSettings();
+  const {
+    workInSec, sbreakInSec, lbreakInSec, workPeriods
+  } = getSettings();
   document.getElementById("currworktime").innerText = utils.secsToMins(
     workInSec,
     true
