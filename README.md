@@ -13,7 +13,7 @@ developed in ten weeks for a graduate class?"
 
 Do you just, like, _really_ like tomatoes?
 
-Then we have the application for you! Introducing __Pomodoro 2: Tokyo Drift__,
+Then we have the application for you! Introducing **Pomodoro 2: Tokyo Drift**,
 coming at you hot, ready, and decently well-tested from the sandy beaches of
 UC San Diego.
 
@@ -30,7 +30,6 @@ npm install
 ### Package dependencies
 
 See the repository's `package.json` file.
-
 
 ### Start development
 

@@ -77,34 +77,24 @@ function displaySessionSettings(
   lbreakInSec,
   workPeriods
 ) {
-  document.getElementById("worktime").innerText = `Work Session: ${
-    workInSec / 60
-  }mins`;
-  document.getElementById("shortbreak").innerText = `Short Break: ${
-    sbreakInSec / 60
-  }mins`;
-  document.getElementById("longbreak").innerText = `Long Break: ${
-    lbreakInSec / 60
-  }mins`;
-  document.getElementById("workp").innerText = `Work Periods: ${workPeriods}`;
+  document.getElementById("worktime").innerText = `${workInSec / 60} mins`;
+  document.getElementById("shortbreak").innerText = `${sbreakInSec / 60} mins`;
+  document.getElementById("longbreak").innerText = `${lbreakInSec / 60} mins`;
+  document.getElementById("workp").innerText = `${workPeriods}`;
 }
 /** This function display most recent settings in side menu.
  * i.e next session info.
  */
 function displayCurrentSettings() {
   const { workInSec, sbreakInSec, lbreakInSec, workPeriods } = getSettings();
-  document.getElementById("currworktime").innerText = `Work Session: ${
-    workInSec / 60
-  } mins`;
-  document.getElementById("currshortbreak").innerText = `Short Break: ${
+  document.getElementById("currworktime").innerText = `${workInSec / 60} mins`;
+  document.getElementById("currshortbreak").innerText = `${
     sbreakInSec / 60
   } mins`;
-  document.getElementById("currlongbreak").innerText = `Long Break: ${
+  document.getElementById("currlongbreak").innerText = `${
     lbreakInSec / 60
   } mins`;
-  document.getElementById(
-    "currworkp"
-  ).innerText = `Work Periods: ${workPeriods}`;
+  document.getElementById("currworkp").innerText = `${workPeriods}`;
 }
 
 module.exports = { setSettings, getSettings, displayCurrentSettings };

@@ -30,6 +30,10 @@
   color: black;
   /* padding: 10px 15px; */
   border: none;
+  /* Prevent a border from being shown around the button when clicked (it just
+   * doesn't look good when that happens): https://stackoverflow.com/a/52714433
+   */
+  outline: none !important;
 }
 
 .toggleMenuBtn:hover {
@@ -108,4 +112,48 @@
   display: none;
   overflow: hidden;
   background-color: #f1f1f1;
+}
+
+/* The following CSS styles the session "info tables" in the menu.
+ * Some of this was derived from MDN's documentation on styling tables (bless):
+ * https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Styling_tables
+ */
+.sessionInfoTable td,
+.sessionInfoTable th {
+  padding: 2px;
+  border-collapse: collapse;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+}
+
+/* For the table headers (only on the left column of the table), don't use a
+ * left border (so that the table's left edge is flush with the edge of the
+ * screen).
+ */
+.sessionInfoTable th {
+  border-right: 1px solid gray;
+}
+
+/* And for the table non-header columns (only on the right column of the
+ * table), don't use a right border (so that the table's right edge is flush).
+ */
+.sessionInfoTable td {
+  border-left: 1px solid gray;
+}
+
+/* Don't show a border around the "top" portion of the table titles.
+ * Just another small little cosmetic thing.
+ */
+.tableTopHeader {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.sessionInfoTable {
+  width: 100%;
+  margin-top: 1em;
+  border-collapse: collapse;
+  border-left: none !important;
+  border-right: none !important;
 }
