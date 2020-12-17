@@ -102,9 +102,7 @@ function displaySessionSettings(
  * i.e next session info.
  */
 function displayCurrentSettings() {
-  const {
-    workInSec, sbreakInSec, lbreakInSec, workPeriods
-  } = getSettings();
+  const { workInSec, sbreakInSec, lbreakInSec, workPeriods } = getSettings();
   document.getElementById("currworktime").innerText = utils.secsToMins(
     workInSec,
     true
