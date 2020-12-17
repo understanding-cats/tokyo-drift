@@ -15,7 +15,16 @@ function loadSessionHistory(path) {
   }
 }
 
-// Modified from https://stackoverflow.com/questions/36856232/write-add-data-in-json-file-using-node-js/36857101.
+/** This function stores pomodoro session history in persistent data.
+ * Modified from https://stackoverflow.com/questions/36856232/write-add-data-in-json-file-using-node-js/36857101.
+ * @param {string} jsonpath - path to json file
+ * @param {string} taskDate - date of task
+ * @param {string} taskName - name of task
+ * @param {string} taskStart - starting time of task
+ * @param {number} workLength - length of work session
+ * @param {number} breakLength - length of break session
+ * @param {number} allPeriods - total number of work periods.
+ */
 function storeSessionToFile(
   jsonpath,
   taskDate,
@@ -27,7 +36,7 @@ function storeSessionToFile(
 ) {
   const fs = window.require("fs");
   const path = window.require("path");
-  var jPath = path.join(__dirname, "..", "json", jsonpath);
+  var jPath = path.join(__dirname, "..", "..", "json", jsonpath);
   fs.readFile(jPath, "utf8", function readFileCallback(err, data) {
     if (err) {
       throw err;
@@ -48,6 +57,11 @@ function storeSessionToFile(
   });
 }
 
+/** This function displays session records on html page.
+ * It creates a new element for each record
+ * @param {string} startDate - date of task
+ * @param {object} record - task record object
+ */
 function displaySessionRecord(startDate, record) {
   const clnbtn = document.getElementById("dummyBtn").cloneNode(true);
   clnbtn.removeAttribute("ID");
