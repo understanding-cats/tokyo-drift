@@ -1,3 +1,5 @@
+const utils = require("../js/utils");
+
 /** This function fetches user settings from input value and store settings in localstorage.
  * @returns workInSec, sbreakInSec, lbreakInSec, workPeriods
  */
@@ -33,6 +35,7 @@ function setSettings() {
  * @returns workInSec, sbreakInSec, lbreakInSec, workPeriods
  */
 function getSettings() {
+  // TODO: Clean this up, because it looks scary
   const workInSec = localStorage.getItem("work_ls") || 25 * 60;
   const sbreakInSec = localStorage.getItem("sbreak_ls") || 5 * 60;
   const lbreakInSec = localStorage.getItem("lbreak_ls") || 15 * 60;
@@ -59,9 +62,13 @@ function getSettings() {
  * @param {number} workPeriods
  */
 function displaySettings(workInSec, sbreakInSec, lbreakInSec, workPeriods) {
-  document.getElementById("pomo_length").value = workInSec / 60;
-  document.getElementById("sbreak_length").value = sbreakInSec / 60;
-  document.getElementById("lbreak_length").value = lbreakInSec / 60;
+  document.getElementById("pomo_length").value = utils.secsToMins(workInSec);
+  document.getElementById("sbreak_length").value = utils.secsToMins(
+    sbreakInSec
+  );
+  document.getElementById("lbreak_length").value = utils.secsToMins(
+    lbreakInSec
+  );
   document.getElementById("work_periods").value = workPeriods;
 }
 
@@ -77,9 +84,18 @@ function displaySessionSettings(
   lbreakInSec,
   workPeriods
 ) {
-  document.getElementById("worktime").innerText = `${workInSec / 60} mins`;
-  document.getElementById("shortbreak").innerText = `${sbreakInSec / 60} mins`;
-  document.getElementById("longbreak").innerText = `${lbreakInSec / 60} mins`;
+  document.getElementById("worktime").innerText = utils.secsToMins(
+    workInSec,
+    true
+  );
+  document.getElementById("shortbreak").innerText = utils.secsToMins(
+    sbreakInSec,
+    true
+  );
+  document.getElementById("longbreak").innerText = utils.secsToMins(
+    lbreakInSec,
+    true
+  );
   document.getElementById("workp").innerText = `${workPeriods}`;
 }
 /** This function display most recent settings in side menu.
@@ -87,13 +103,18 @@ function displaySessionSettings(
  */
 function displayCurrentSettings() {
   const { workInSec, sbreakInSec, lbreakInSec, workPeriods } = getSettings();
-  document.getElementById("currworktime").innerText = `${workInSec / 60} mins`;
-  document.getElementById("currshortbreak").innerText = `${
-    sbreakInSec / 60
-  } mins`;
-  document.getElementById("currlongbreak").innerText = `${
-    lbreakInSec / 60
-  } mins`;
+  document.getElementById("currworktime").innerText = utils.secsToMins(
+    workInSec,
+    true
+  );
+  document.getElementById("currshortbreak").innerText = utils.secsToMins(
+    sbreakInSec,
+    true
+  );
+  document.getElementById("currlongbreak").innerText = utils.secsToMins(
+    lbreakInSec,
+    true
+  );
   document.getElementById("currworkp").innerText = `${workPeriods}`;
 }
 
