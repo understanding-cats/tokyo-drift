@@ -81,22 +81,44 @@ function secsToHumanReadableTime(secs) {
   }
 }
 
+/**
+ * Converts seconds to minutes, representing the output as a String.
+ *
+ * Currently we're very lax about what sort of inputs we accept: this is in
+ * part because the storage stuff in some cases retrieves values as Strings. We
+ * should really make this more restrictive when possible (so that secs must be
+ * a Number).
+ *
+ * @param {String | Number} secs Must be interpretable using parseFloat() as a
+ *                               Number >= 0.
+ *
+ * @param {Boolean} withSuffix Defaults to false. If true, this will add a
+ *                             " mins" suffix to the output.
+ *
+ * @returns {String} mins Representation of the number of seconds as a number
+ *                        of minutes. This uses Number.toLocaleString() to
+ *                        format the number (so the user isn't punched in the
+ *                        face with e.g. 0.5999999999).
+ *
+ * @throws {Error} If secs is not interpretable as a Number (i.e. calling
+ *                 parseFloat() on it produces NaN), or if parseFloat()
+ *                 determines it to be a negative Number.
+ */
 function secsToMins(secs, withSuffix = false) {
   let numSecs = parseFloat(secs);
   if (!Number.isNaN(numSecs)) {
     if (numSecs >= 0) {
       var mins = numSecs / 60;
-      var formattedStr = mins.toFixed(2);
+      var formattedStr = mins.toLocaleString("en-US");
       if (withSuffix) {
         return `${formattedStr} mins`;
       } else {
         return formattedStr;
       }
     } else {
-      throw new Error("Input to secsToMins must be an number >= 0.");
+      throw new Error("Input to secsToMins must be a number >= 0.");
     }
   } else {
-    console.log(numSecs);
     throw new Error("Input to secsToMins must be a number.");
   }
 }

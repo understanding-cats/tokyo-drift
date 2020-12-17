@@ -108,4 +108,30 @@ describe("Utils", function () {
       }
     });
   });
+  describe("secsToMins()", function () {
+      it("Works when withSuffix is false", function () {
+          // 1500 = 25 * 60
+          assert.equal(utils.secsToMins(1500), "25");
+          assert.equal(utils.secsToMins(1501), "25.017");
+          assert.equal(utils.secsToMins(0), "0");
+          assert.equal(utils.secsToMins(1), "0.017");
+      });
+      it("Works when withSuffix is true", function () {
+          // 1500 = 25 * 60
+          assert.equal(utils.secsToMins(1500, true), "25 mins");
+          assert.equal(utils.secsToMins(1501, true), "25.017 mins");
+          assert.equal(utils.secsToMins(0, true), "0 mins");
+          assert.equal(utils.secsToMins(1, true), "0.017 mins");
+      });
+      it("Throws an error when the input is a negative number", function () {
+          assert.throws(function () {
+              utils.secsToMins(-1);
+          }, /Input to secsToMins must be a number >= 0\./);
+      });
+      it("Throws an error when the input is not interpretable as a number", function () {
+          assert.throws(function () {
+              utils.secsToMins("howdy");
+          }, /Input to secsToMins must be a number\./);
+      });
+    });
 });
