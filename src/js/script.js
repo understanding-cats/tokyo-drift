@@ -19,12 +19,12 @@ function showstatus(currStatus, periodNum) {
     currStatus === sessionStatusObj.WORKING ||
     currStatus === sessionStatusObj.WORK_PAUSE
   ) {
-    statusText = `Working... (${periodNum})`;
+    statusText = `Working... (${periodNum} / ${totalPeriods})`;
   } else if (
     currStatus === sessionStatusObj.BREAK ||
     currStatus === sessionStatusObj.CHILL_PAUSE
   ) {
-    statusText = `Chilling... (${periodNum})`;
+    statusText = `Chilling... (${periodNum} / ${totalPeriods})`;
   } else {
     // Corresponds to sessionStatus.NOSESSION, or some additional option added
     // in the future that we don't know about
