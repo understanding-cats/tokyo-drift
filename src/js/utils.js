@@ -126,9 +126,9 @@ function secsToMins(secs, withSuffix = false) {
 }
 
 /**
- * Restraining input as integer from 1 to 99
- * If input is a number but not with in 1~99, silently make it as close a possible.
- * If input is within range but not an integer, silently round to nearest int.
+ * "Clamps" a number to be an integer in the range [1, 99].
+ * If input is a number but not within [1, 99], silently make it as close as possible.
+ * If input is within range but not an integer, silently round to the nearest integer.
  *
  * @param {Number} numInput numInput that is expected to be a number from 1 to 99.
  *
