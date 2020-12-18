@@ -62,7 +62,7 @@ npm run style
 
 All the tests are located in the `test/` directory.
 
-```
+```bash
 # Runs all tests
 npm run test:all
 # Runs just the unit tests
