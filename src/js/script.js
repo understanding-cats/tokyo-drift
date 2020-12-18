@@ -136,11 +136,18 @@ function takeBreak(secs) {
 /**
  * This function is called every second by setInterval().
  *
- * Its handles switching states when the current session ends.
+ * It updates the clock and handles switching states when the current
+ * session ends.
+ *
+ * As you can probably tell by the fact that this function accepts no
+ * parameters, the behavior of this function is entirely dependent on global
+ * variables. One way to get around this might be modifying this function to
+ * take in some sort of state object as a paramter and act accordingly -- this
+ * would simplify testing significantly.
  */
 function showtime() {
   if (currSession === sessionStatusObj.WORKING) {
-    if (totalSecs >= 0) {
+    if (totalSecs > 0) {
       totalSecs = decreaseTime(totalSecs);
     } else {
       // working and remaining secs <= 0
@@ -149,7 +156,7 @@ function showtime() {
       totalSecs = breakUpdates.secs;
     }
   } else if (currSession === sessionStatusObj.BREAK) {
-    if (totalSecs >= 0) {
+    if (totalSecs > 0) {
       // if breaking and have remaining secs
       totalSecs = decreaseTime(totalSecs);
     } else {
@@ -169,8 +176,10 @@ function showtime() {
   updateClock(totalSecs);
 }
 
-/** Ask user to confirm action when click cancel
- * bind to an onclick actionl.
+/**
+ * Stops the timer, and pops up a confirmation dialog for the user asking if
+ * they would like to cancel the current session. If the user indicates they
+ * would like to do so, this returns to the menu.
  */
 function cancelAll() {
   timer.stop();
