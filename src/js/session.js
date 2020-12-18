@@ -50,7 +50,7 @@ function storeSessionToFile(
         blength: breakLength,
         periods: allPeriods,
       };
-      obj.records.push(n_record);
+      obj.records.push(nRecord);
       json = JSON.stringify(obj, null, 4);
       fs.writeFileSync(jPath, json); // write it back
     }

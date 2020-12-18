@@ -123,4 +123,34 @@ function secsToMins(secs, withSuffix = false) {
   }
 }
 
-module.exports = { padzero, secsToHumanReadableTime, secsToMins };
+/**
+ * Restraining input as integer from 1 to 99
+ * If input is a number but not with in 1~99, silently make it as close a possible.
+ * If input is within range but not an integer, silently round to nearest int.
+ *
+ * @param {Number} numInput numInput that is expected to be a number from 1 to 99.
+ *
+ * @throws {Error} If numInput is not number, throw error.
+ */
+function validateNumInputs(nInput) {
+  let numInput = parseFloat(nInput);
+  if (!Number.isNaN(numInput)) {
+    if (numInput < 1) {
+      numInput = 1;
+    } else if (numInput > 99) {
+      numInput = 99;
+    } else {
+      numInput = Math.round(numInput);
+    }
+    return numInput;
+  } else {
+    throw new Error("Input must be a number.");
+  }
+}
+
+module.exports = {
+  padzero,
+  secsToHumanReadableTime,
+  secsToMins,
+  validateNumInputs,
+};

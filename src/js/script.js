@@ -136,7 +136,7 @@ function takeBreak(secs) {
  */
 function showtime() {
   if (currSession === sessionStatusObj.WORKING) {
-    if (totalSecs >= 0) {
+    if (totalSecs > 0) {
       totalSecs = decreaseTime(totalSecs);
     } else {
       // working and remaining secs <= 0
@@ -145,7 +145,7 @@ function showtime() {
       totalSecs = breakUpdates.secs;
     }
   } else if (currSession === sessionStatusObj.BREAK) {
-    if (totalSecs >= 0) {
+    if (totalSecs > 0) {
       // if breaking and have remaining secs
       totalSecs = decreaseTime(totalSecs);
     } else {
@@ -198,10 +198,10 @@ let totalLongBreak = parseInt(lbreakInSec, 10);
 let totalPeriods = parseInt(workPeriods, 10);
 
 // 5 secs for quick end2end testing
-// totalWork = 5;
-// totalBreak = 1;
+ totalWork = 5;
+ totalBreak = 2;
 // totalLongBreak = 10;
-// totalPeriods = 1;
+ totalPeriods = 2;
 
 let intervalID;
 let currSession = 0;
