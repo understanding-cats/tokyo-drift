@@ -3,7 +3,7 @@
   "productName": "tokyo-drift",
   "version": "1.0.0",
   "description": "Pomodoro 2.0",
-  "main": ".src/main.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
