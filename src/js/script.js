@@ -121,7 +121,6 @@ function takeBreak(secs) {
   document.getElementById("tomato_img").src = "../images/tomatoblue_tran.png";
   return { secs, currStatus: sessionStatusObj.BREAK };
 }
-<<<<<<< HEAD
 
 /**
  * This function is called every second by setInterval().
@@ -139,17 +138,6 @@ function showtime() {
   if (currSession === sessionStatusObj.WORKING) {
     if (totalSecs > 0) {
       totalSecs = decreaseTime(totalSecs);
-=======
-// Modified from https://stackoverflow.com/questions/36856232/write-add-data-in-json-file-using-node-js/36857101.
-function writeToFile(jsonpath,taskDate,taskName,taskStart,workLength,breakLength,allPeriods){
-  const fs = window.require('fs');
-  const path = window.require('path');
-  var jPath = path.join(__dirname,'..','json', jsonpath);
-  console.log(jPath);
-  fs.readFile(jPath, 'utf8', function readFileCallback(err, data){
-    if (err){
-        console.log(err);
->>>>>>> 6784aa2 (Update src/js/script.js)
     } else {
       // working and remaining secs <= 0
       breakUpdates = takeBreak(totalSecs);
@@ -191,7 +179,6 @@ function cancelAll() {
 }
 
 // On page load, get all session info
-<<<<<<< HEAD
 const taskName =
   localStorage.getItem("session_name") || "Default Pomodoro Session";
 const {
@@ -205,29 +192,6 @@ let workDate = currDateOnPageLoad.toLocaleDateString();
 let workTime = currDateOnPageLoad.toLocaleTimeString();
 
 updateClock(workInSec);
-=======
-const taskName = localStorage.getItem("session_name") || "Default Pomodoro Session";
-const workInSec = localStorage.getItem("work_ls") || 25 * 60;
-const sbreakInSec = localStorage.getItem("sbreak_ls") || 5 * 60;
-const lbreakInSec = localStorage.getItem("lbreak_ls") || 15 * 60;
-const workPeriods = localStorage.getItem("periods_ls") || 4;
-let currDate = new Date();
-let workDate = currDate.toLocaleDateString();
-let workTime = currDate.toLocaleTimeString();
-
-document.getElementById("currworktime").innerText = `Work Session: ${
-  workInSec / 60
-} mins`;
-document.getElementById("currshortbreak").innerText = `Short Break: ${
-  sbreakInSec / 60
-} mins`;
-document.getElementById("currlongbreak").innerText = `Long Break: ${
-  lbreakInSec / 60
-} mins`;
-document.getElementById("currworkp").innerText = `Work Periods: ${workPeriods}`;
-
-miniclock(workInSec);
->>>>>>> a0d4157 (Update src/js/script.js)
 
 // TODO: totalWork = work_incec etc.
 let totalWork = parseInt(workInSec, 10);
@@ -237,9 +201,9 @@ let totalPeriods = parseInt(workPeriods, 10);
 
 // 5 secs for quick end2end testing
 // totalWork = 5;
-// totalBreak = 2;
+// totalBreak = 1;
 // totalLongBreak = 10;
-// totalPeriods = 2;
+// totalPeriods = 1;
 
 let intervalID;
 let currSession = 0;
