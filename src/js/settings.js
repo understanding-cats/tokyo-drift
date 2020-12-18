@@ -4,10 +4,16 @@ const utils = require("../js/utils");
  * @returns workInSec, sbreakInSec, lbreakInSec, workPeriods
  */
 function setSettings() {
-  const workInSec = 60 * utils.validateNumInputs(document.getElementById("pomo_length").value);
-  const sbreakInSec = 60 * utils.validateNumInputs(document.getElementById("sbreak_length").value);
-  const lbreakInSec = 60 * utils.validateNumInputs(document.getElementById("lbreak_length").value);
-  const workPeriods = 1 * utils.validateNumInputs(document.getElementById("work_periods").value);
+  const workInSec =
+    60 * utils.validateNumInputs(document.getElementById("pomo_length").value);
+  const sbreakInSec =
+    60 *
+    utils.validateNumInputs(document.getElementById("sbreak_length").value);
+  const lbreakInSec =
+    60 *
+    utils.validateNumInputs(document.getElementById("lbreak_length").value);
+  const workPeriods =
+    1 * utils.validateNumInputs(document.getElementById("work_periods").value);
   localStorage.setItem("work_ls", workInSec);
   localStorage.setItem("sbreak_ls", sbreakInSec);
   localStorage.setItem("lbreak_ls", lbreakInSec);
