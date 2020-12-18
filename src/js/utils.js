@@ -132,7 +132,7 @@ function secsToMins(secs, withSuffix = false) {
  *
  * @param {String} numInput String representing a Number.
  *
- * @throws {Error} If numInput is not number, throw error.
+ * @throws {Error} If parseFloat(numInput) is not a number.
  */
 function validateNumInputs(nInput) {
   let numInput = parseFloat(nInput);
