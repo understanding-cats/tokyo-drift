@@ -3,9 +3,9 @@
   "productName": "tokyo-drift",
   "version": "1.0.0",
   "description": "Pomodoro 2.0",
-  "main": ".webpack/main",
+  "main": ".src/main.js",
   "scripts": {
-    "start": "electron src/main.js",
+    "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
@@ -47,24 +47,7 @@
           "config": {}
         }
       ],
-      "plugins": [
-        [
-          "@electron-forge/plugin-webpack",
-          {
-            "mainConfig": "./webpack.main.config.js",
-            "renderer": {
-              "config": "./webpack.renderer.config.js",
-              "entryPoints": [
-                {
-                  "html": "./src/html/home.html",
-                  "js": "./src/renderer/renderer.js",
-                  "name": "main_window"
-                }
-              ]
-            }
-          }
-        ]
-      ]
+      "plugins": []
     }
   },
   "devDependencies": {
@@ -73,8 +56,6 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
-    "@electron-forge/plugin-webpack": "^6.0.0-beta.54",
-    "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "css-loader": "^4.3.0",
