@@ -31,20 +31,12 @@ npm install
 
 See the repository's `package.json` file.
 
-### Start development
+### Start the application
 
 You can start the app with:
 
 ```
 npm start
-```
-
-The app has hot-reloading for any JS or HTML change. For any change to the electron code, just type `rs` in the electron console.
-
-For debugging, you can add the following statement to your electron window:
-
-```
-win.webContents.openDevTools()
 ```
 
 ### Linting and stylechecking
@@ -79,28 +71,58 @@ npm run test:unit
 
 ### Generate the documentation
 
+Documentation can be auto-generated using
+[documentation.js](https://documentation.js.org/), a lovely library that does
+this with aplomb.
+
+The following command will generate pretty, easy-to-navigate documentation for
+all of the various functions/classes included within the codebase:
+
 ```
 npm run doc
 ```
 
-All the documentation should be available after that in the `docs/` directory in the HTML file format.
+All the documentation should be available after that in the `docs/` directory
+in the HTML file format.
+
+We note that it's currently the job of the individual developer to generate
+documentation on their own system; in the future, it should be totally possible
+to do something like generate the documentation in the CI pipeline and publish
+it to a GitHub pages site.
 
 ### Build the application
 
-**NOTE: This is currently not working. We're hoping to fix this soon.**
+We do this using [Electron Forge](https://www.electronforge.io/).
 
-For the moment, this is only available for Linux distributions.
+For the moment, this is only supported for Linux distributions, but (since
+Electron Forge is pretty comprehensive) this should be extendable relatively
+easily to work with other operating systems.
 
-You can either make a package containing all the files of the app:
+There are two main "build" commands we have set up right now:
+
+#### Option 1: Build a package containing all the files of the app
 
 ```
 npm run package
 ```
 
-Or you can gather everything into an executable:
+#### Option 2: Gather everything into an executable
 
 ```
 npm run make
 ```
 
-All the result will be available in the `out/` directory.
+#### Accessing the output of building
+
+All the results will be available in the `out/` directory.
+
+#### Troubleshooting building
+
+If you get an error from `electron-forge` in the above steps (something along
+the lines of "Cannot make for rpm, the following external binaries need to be
+installed"), then you need to make sure that certain packages are installed on
+your system.
+
+For one of the developers using Ubuntu, installing `rpm` using
+`sudo apt install rpm` fixed this problem
+([shoutouts to Stack Overflow](https://stackoverflow.com/a/59571436)).
