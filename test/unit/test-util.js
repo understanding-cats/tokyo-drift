@@ -134,33 +134,4 @@ describe("Utils", function () {
       }, /Input to secsToMins must be a number\./);
     });
   });
-  describe("validateNumInputs()", function () {
-    it("Validates integer from 1 to 99", function () {
-      assert.equal(utils.validateNumInputs(1), 1);
-      assert.equal(utils.validateNumInputs(99), 99);
-      assert.equal(utils.validateNumInputs(25), 25);
-      assert.equal(utils.validateNumInputs(26), 26);
-    });
-    it("Limit any input out of bound", function () {
-      assert.equal(utils.validateNumInputs(-11), 1);
-      assert.equal(utils.validateNumInputs(99999), 99);
-      assert.equal(utils.validateNumInputs(Infinity), 99);
-      assert.equal(utils.validateNumInputs(-Infinity), 1);
-      assert.equal(utils.validateNumInputs(99 + 1), 99);
-      assert.equal(utils.validateNumInputs(0.002), 1);
-    });
-    it("Round float to nearest integer", function () {
-      assert.equal(utils.validateNumInputs(1.2), 1);
-      assert.equal(utils.validateNumInputs(1.5), 2);
-      assert.equal(utils.validateNumInputs(98.9999), 99);
-    });
-    it("Throws an error if a non-number is passed in", function () {
-      const badStuff = [NaN, "Not number", new Object()];
-      for (const b of badStuff) {
-        assert.throws(function () {
-          utils.validateNumInputs(b);
-        }, /Input must be a number\./);
-      }
-    });
-  });
 });

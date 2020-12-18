@@ -32,38 +32,6 @@ function showstatus(currStatus, periodNum) {
   }
   document.getElementById("status").innerText = statusText;
 }
-// Modified from https://stackoverflow.com/questions/36856232/write-add-data-in-json-file-using-node-js/36857101.
-function writeToFile(
-  jsonpath,
-  taskDate,
-  taskName,
-  taskStart,
-  workLength,
-  breakLength,
-  allPeriods
-) {
-  const fs = window.require("fs");
-  const path = window.require("path");
-  const jPath = path.join(__dirname, "..", "json", jsonpath);
-  fs.readFile(jPath, "utf8", function readFileCallback(err, data) {
-    if (err) {
-      throw err;
-    } else {
-      obj = JSON.parse(data);
-      nRecord = {
-        date: taskDate,
-        task: taskName,
-        start: taskStart,
-        wlength: workLength,
-        blength: breakLength,
-        periods: allPeriods,
-      };
-      obj.records.push(nRecord);
-      json = JSON.stringify(obj, null, 4);
-      fs.writeFileSync(jPath, json); // write it back
-    }
-  });
-}
 
 /**
  * Displays remaining time in MM:SS format.
