@@ -2,6 +2,7 @@ var assert = require("assert");
 // I don't know why, but this breaks when I omit the trailing ".js". No idea
 // why that works for other modules.
 var utils = require("../../src/js/utils.js");
+var session = require("../../src/js/session.js");
 
 describe("Utils", function () {
   describe("padzero()", function () {
@@ -132,6 +133,51 @@ describe("Utils", function () {
       assert.throws(function () {
         utils.secsToMins("howdy");
       }, /Input to secsToMins must be a number\./);
+    });
+  });
+  describe("getStatusMsg()", function () {
+    const statuses = session.sessionStatusObj;
+    it("Functions properly for work periods", function () {
+      assert.equal(
+        utils.getStatusMsg(statuses.WORKING, 1, 5),
+        "Working... (1 / 5)"
+      );
+      assert.equal(
+        utils.getStatusMsg(statuses.WORKING, 5, 5),
+        "Working... (5 / 5)"
+      );
+      assert.equal(
+        utils.getStatusMsg(statuses.WORK_PAUSE, 3, 4),
+        "Working... (3 / 4)"
+      );
+    });
+    it("Functions properly for break periods", function () {
+      assert.equal(
+        utils.getStatusMsg(statuses.BREAK, 2, 4),
+        "Chilling... (2 / 4)"
+      );
+      assert.equal(
+        utils.getStatusMsg(statuses.CHILL_PAUSE, 5, 5),
+        "Chilling... (5 / 5)"
+      );
+    });
+    it("Shows a general status when we don't recognize the session status", function () {
+      assert.equal(
+        utils.getStatusMsg(statuses.NOSESSION, 2, 4),
+        "Pomodoro (2 / 4)"
+      );
+      assert.equal(
+        utils.getStatusMsg("haha i'm evil", 3, 9),
+        "Pomodoro (3 / 9)"
+      );
+    });
+    // (This should never happen in practice, but if we change how we number
+    // things then we might want to use this)
+    it("Doesn't complain if periodNum is zero or negative", function () {
+      assert.equal(
+        utils.getStatusMsg(statuses.WORKING, 0, 2),
+        "Working... (0 / 2)"
+      );
     });
   });
 });

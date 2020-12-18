@@ -10,27 +10,16 @@ const notification = require("../js/notification");
  * Displays current session status on the HTML page.
  *
  * @param {Number} currStatus Current session status. This should match one of
- *                            the values in the sessionStatus object, imported above.
+ *                            the values in sessionStatusObj, imported above.
+ *
  * @param {Number} periodNum Current period number.
  */
 function showstatus(currStatus, periodNum) {
-  let statusText;
-  if (
-    currStatus === sessionStatusObj.WORKING ||
-    currStatus === sessionStatusObj.WORK_PAUSE
-  ) {
-    statusText = `Working... (${periodNum} / ${totalPeriods})`;
-  } else if (
-    currStatus === sessionStatusObj.BREAK ||
-    currStatus === sessionStatusObj.CHILL_PAUSE
-  ) {
-    statusText = `Chilling... (${periodNum} / ${totalPeriods})`;
-  } else {
-    // Corresponds to sessionStatus.NOSESSION, or some additional option added
-    // in the future that we don't know about
-    statusText = `Pomodoro ${periodNum}`;
-  }
-  document.getElementById("status").innerText = statusText;
+  document.getElementById("status").innerText = utils.getStatusMsg(
+    currStatus,
+    periodNum,
+    totalPeriods
+  );
 }
 
 /**
