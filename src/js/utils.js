@@ -130,7 +130,7 @@ function secsToMins(secs, withSuffix = false) {
  * If input is a number but not within [1, 99], silently make it as close as possible.
  * If input is within range but not an integer, silently round to the nearest integer.
  *
- * @param {Number} numInput numInput that is expected to be a number from 1 to 99.
+ * @param {String} numInput String representing a Number.
  *
  * @throws {Error} If numInput is not number, throw error.
  */
