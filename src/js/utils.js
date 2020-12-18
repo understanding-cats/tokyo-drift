@@ -160,4 +160,35 @@ function getStatusMsg(currStatus, periodNum, totalPeriods) {
   }
 }
 
-module.exports = { padzero, secsToHumanReadableTime, secsToMins, getStatusMsg };
+/**
+ * "Clamps" a number to be an integer in the range [1, 99].
+ * If input is a number but not within [1, 99], silently make it as close as possible.
+ * If input is within range but not an integer, silently round to the nearest integer.
+ *
+ * @param {String} numInput String representing a Number.
+ *
+ * @throws {Error} If parseFloat(numInput) is not a number.
+ */
+function validateNumInputs(nInput) {
+  let numInput = parseFloat(nInput);
+  if (!Number.isNaN(numInput)) {
+    if (numInput < 1) {
+      numInput = 1;
+    } else if (numInput > 99) {
+      numInput = 99;
+    } else {
+      numInput = Math.round(numInput);
+    }
+    return numInput;
+  } else {
+    throw new Error("Input must be a number.");
+  }
+}
+
+module.exports = {
+  padzero,
+  secsToHumanReadableTime,
+  secsToMins,
+  getStatusMsg,
+  validateNumInputs,
+};
