@@ -1,9 +1,9 @@
 ---
 name: Logistical issue
-about: Something relating to logistics: fixing our build pipeline, etc.
-title: ''
+about: Something relating to project logistics (e.g. build pipeline)
+title: ""
 labels: logistics
-assignees: ''
+assignees: ""
 ---
 
 **Describe the issue**

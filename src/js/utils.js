@@ -2,6 +2,8 @@
 // In a larger project, there would likely be many "utils" modules, but for a
 // small thing like this having a single "utils" file is probably kosher.
 
+const { sessionStatusObj, storeSessionToFile } = require("../js/session");
+
 /**
  * Pads a number with zeroes so that it is exactly two digits long.
  *
@@ -148,9 +150,45 @@ function validateNumInputs(nInput) {
   }
 }
 
+/**
+ * Produces a user-friendly status message based on the app status.
+ *
+ * @param {Number} currStatus Current session status. Should match one of the
+ *                            values in sessionStatusObj.
+ *
+ * @param {Number} periodNum The number of this period (1 indicates the first
+ *                           work period and break period, 2 indicates the
+ *                           second of these, etc).
+ *
+ * @param {Number} totalPeriods The total number of work periods. We use this
+ *                              to give the user some context as to how far
+ *                              through their Pomodoro session they are.
+ *
+ * @returns {String} statusText User-friendly message describing the app status
+ */
+function getStatusMsg(currStatus, periodNum, totalPeriods) {
+  const suffix = `(${periodNum} / ${totalPeriods})`;
+  if (
+    currStatus === sessionStatusObj.WORKING ||
+    currStatus === sessionStatusObj.WORK_PAUSE
+  ) {
+    return `Working... ${suffix}`;
+  } else if (
+    currStatus === sessionStatusObj.BREAK ||
+    currStatus === sessionStatusObj.CHILL_PAUSE
+  ) {
+    return `Chilling... ${suffix}`;
+  } else {
+    // Corresponds to sessionStatus.NOSESSION, or some additional option added
+    // in the future that we don't know about
+    return `Pomodoro ${suffix}`;
+  }
+}
+
 module.exports = {
   padzero,
   secsToHumanReadableTime,
   secsToMins,
+  getStatusMsg,
   validateNumInputs,
 };

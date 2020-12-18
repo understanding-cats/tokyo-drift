@@ -1,6 +1,6 @@
 /** Function that loads home page.
  */
-function back2menu() {
+function goToMenu() {
   location.href = "home.html";
 }
 /** Function that loads pomodoro page.

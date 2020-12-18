@@ -10,27 +10,16 @@ const notification = require("../js/notification");
  * Displays current session status on the HTML page.
  *
  * @param {Number} currStatus Current session status. This should match one of
- *                            the values in the sessionStatus object, imported above.
+ *                            the values in sessionStatusObj, imported above.
+ *
  * @param {Number} periodNum Current period number.
  */
 function showstatus(currStatus, periodNum) {
-  let statusText;
-  if (
-    currStatus === sessionStatusObj.WORKING ||
-    currStatus === sessionStatusObj.WORK_PAUSE
-  ) {
-    statusText = `Working... (${periodNum})`;
-  } else if (
-    currStatus === sessionStatusObj.BREAK ||
-    currStatus === sessionStatusObj.CHILL_PAUSE
-  ) {
-    statusText = `Chilling... (${periodNum})`;
-  } else {
-    // Corresponds to sessionStatus.NOSESSION, or some additional option added
-    // in the future that we don't know about
-    statusText = `Pomodoro ${periodNum}`;
-  }
-  document.getElementById("status").innerText = statusText;
+  document.getElementById("status").innerText = utils.getStatusMsg(
+    currStatus,
+    periodNum,
+    totalPeriods
+  );
 }
 
 /**
@@ -77,7 +66,11 @@ function finishSessions() {
   ); // show desktop notification for all sessions end
   const r = confirm("Sessions complete! Go back to menu?");
   if (r) {
-    location.href = "home.html";
+    // pages.js isn't a module -- it's just a set of global functions, because
+    // its functions are used as callbacks. So we just kind of call goToMenu()
+    // directly. (Ideally we would set the HTML callbacks from within the JS
+    // code, avoiding this problem.)
+    goToMenu();
   } else {
     clearAll();
   }
@@ -132,7 +125,14 @@ function takeBreak(secs) {
 /**
  * This function is called every second by setInterval().
  *
- * Its handles switching states when the current session ends.
+ * It updates the clock and handles switching states when the current
+ * session ends.
+ *
+ * As you can probably tell by the fact that this function accepts no
+ * parameters, the behavior of this function is entirely dependent on global
+ * variables. One way to get around this might be modifying this function to
+ * take in some sort of state object as a paramter and act accordingly -- this
+ * would simplify testing significantly.
  */
 function showtime() {
   if (currSession === sessionStatusObj.WORKING) {
@@ -165,14 +165,16 @@ function showtime() {
   updateClock(totalSecs);
 }
 
-/** Ask user to confirm action when click cancel
- * bind to an onclick actionl.
+/**
+ * Stops the timer, and pops up a confirmation dialog for the user asking if
+ * they would like to cancel the current session. If the user indicates they
+ * would like to do so, this returns to the menu.
  */
 function cancelAll() {
   timer.stop();
   const r = confirm("Are you sure you want to cancel the current session?");
   if (r) {
-    location.href = "home.html";
+    goToMenu();
   }
 }
 
@@ -198,8 +200,8 @@ let totalLongBreak = parseInt(lbreakInSec, 10);
 let totalPeriods = parseInt(workPeriods, 10);
 
 // 5 secs for quick end2end testing
- totalWork = 5;
- totalBreak = 2;
+// totalWork = 5;
+// totalBreak = 2;
 // totalLongBreak = 10;
  totalPeriods = 2;
 
