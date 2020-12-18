@@ -203,7 +203,7 @@ let totalPeriods = parseInt(workPeriods, 10);
 // totalWork = 5;
 // totalBreak = 2;
 // totalLongBreak = 10;
- totalPeriods = 2;
+// totalPeriods = 2;
 
 let intervalID;
 let currSession = 0;
